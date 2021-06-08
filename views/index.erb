@@ -1,1 +1,14 @@
-<h1>hello world</h1>
+
+
+<a href="/tracks/new">share a track</a>
+
+<% tracks.each do |track| %>
+    <h2>
+        <a href="/tracks/<%= track["id"] %>"> 
+            <%= track["track_name"] %>
+        </a>
+    </h2>
+
+    <img src="<%= track["image_url"]%>" alt="image">
+
+<% end %>

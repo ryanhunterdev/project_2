@@ -6,4 +6,5 @@ def run_sql(sql, params = [])
     res = db.exec_params(sql, params)
     db.close
     return res
-end                 
+end          
+
