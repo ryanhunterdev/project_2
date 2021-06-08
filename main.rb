@@ -66,12 +66,17 @@ get '/tracks/:id' do
   track = grab_response("tracks", id)
 
   publisher_id = track["user_id"]
-  publisher = grab_response("users", publisher_id)
+  res = run_sql("SELECT * from users where id = $1;", [publisher_id])
+  publisher = res[0]
+
+
+  tips = run_sql("SELECT * from tips where track_id = $1;", [id])
   # binding.pry
   erb :show_track, locals: { 
     track: track,
     publisher: publisher,
-    session: session
+    session: session,
+    tips: tips
   }
 end
 
@@ -99,20 +104,21 @@ end
 
 post '/tips' do 
   if logged_in?
-    sql = "INSERT INTO tips (track_id, user_id, tip_amount, publisher_id, tip_comment) VALUES ($1, $2, $3, $4, $5);"
+    sql = "INSERT INTO tips (track_id, tipper_id, tipper_name, tip_amount, track_publisher_id, tip_comment) VALUES ($1, $2, $3, $4, $5, $6);"
     run_sql(sql, [
       params['track_id'],
-      params['user_id'],
+      params['tipper_id'],
+      params['tipper_name'],
       params['tip_amount'],
-      params['publisher_id'],
+      params['track_publisher_id'],
       params['tip_comment']
     ])
   else 
-    sql = "INSERT INTO tips (track_id, tip_amount, publisher_id) VALUES ($1, $2, $3);"
+    sql = "INSERT INTO tips (track_id, tip_amount, track_publisher_id) VALUES ($1, $2, $3);"
     run_sql(sql, [
     params['track_id'],
     params['tip_amount'],
-    params['publisher_id']
+    params['track_publisher_id']
   ])
   end
   redirect "tracks/#{params['track_id']}"
@@ -137,6 +143,7 @@ post '/session' do
   if records.count > 0 && BCrypt::Password.new(records[0]['password_digest']) == params['password']
     logged_in_user = records[0]
     session[:user_id] = logged_in_user["id"]
+    session[:user_name] = logged_in_user["user_name"]
     redirect '/'
   else
     invalid_login = "Invalid username or password. Please try again"

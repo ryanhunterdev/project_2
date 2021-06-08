@@ -5,19 +5,48 @@
 
 <p><%= track["track_info"] %></p>
 
-<form action="/tips" method="post">
-    <label for="tip">Support artist, leave a tip:</label>
-    <input type="number" name="tip_amount" id="tip" step=".01" placeholder="1.00">
-    
-    <% if logged_in? %>
-        <label for="tip_comment">Add a comment:</label>
-        <input type="text" name="tip_comment" id="tip_comment">
+<section class="track-info">
+    <form action="/tips" method="post">
+        <label for="tip">Support artist, leave a tip:</label>
+        <input type="number" name="tip_amount" id="tip" step=".01" placeholder="1.00">
+
+        <% if logged_in? %>
+            <label for="tip_comment">Add a comment:</label>
+            <input type="text" name="tip_comment" id="tip_comment">
+        <% end %>
+
+        <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
+        <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
+        <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
+        <input type="hidden" name="track_id" value="<%= track["id"] %>">
+        <input type="hidden" name="publisher_id" value="<%= publisher["id"] %>"> 
+        <button>submit</button>
+    </form>
+</section>
+
+<section class="track-tips">
+
+    <% tips.each do |tip| %>
+        <div class="tip-container">
+            <p class="tip-text">
+                <% if tip["tipper_id"] %>
+                    <a href="users/<%= tip["tipper-id"] %>" class="tip-anchor">
+                            <%= tip["tipper_name"] %> supports this!
+                    </a>
+                <% else %>
+                    anonymous supports this!
+                    </a>
+                <% end %>
+            </p>
+            <p class="tip-comment-text">
+                <%= tip["tip_comment"] %>
+            </p>
+        </div>
+       
     <% end %>
 
-    <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
-    <input type="hidden" name="track_id" value="<%= track["id"] %>">
-    <input type="hidden" name="publisher_id" value="<%= publisher["id"] %>"> 
-    <button>submit</button>
-</form>
+</section>
+
+<!-- ADDING IN THE TIP PARAMS  up to user_id-->
 
 <!-- ADDING IN THE TIP PARAMS  up to user_id-->

@@ -25,7 +25,11 @@ CREATE TABLE tracks (
 
 CREATE TABLE tips (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
+    tipper_id INTEGER,
+    tipper_name TEXT,
     track_id INTEGER,
-    tip_amount DECIMAL(10,2) 
+    track_publisher_id INTEGER,
+    track_publisher_name TEXT,
+    tip_amount DECIMAL(10,2),
+    tip_comment TEXT
 );
