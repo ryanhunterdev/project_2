@@ -3,6 +3,7 @@ require 'sinatra'
 require 'sinatra/reloader' #if development?
 require 'pg'
 require 'bcrypt'
+require 'pry'
 
 require_relative 'db/helpers.rb'
 
@@ -60,16 +61,17 @@ post '/tracks' do
 end
 
 get '/tracks/:id' do
-  
+
   id =  params["id"]
   track = grab_response("tracks", id)
 
   publisher_id = track["user_id"]
   publisher = grab_response("users", publisher_id)
-
+  # binding.pry
   erb :show_track, locals: { 
     track: track,
-    publisher: publisher
+    publisher: publisher,
+    session: session
   }
 end
 
@@ -96,7 +98,24 @@ end
 ########################
 
 post '/tips' do 
-  redirect 'tracks/:id'
+  if logged_in?
+    sql = "INSERT INTO tips (track_id, user_id, tip_amount, publisher_id, tip_comment) VALUES ($1, $2, $3, $4, $5);"
+    run_sql(sql, [
+      params['track_id'],
+      params['user_id'],
+      params['tip_amount'],
+      params['publisher_id'],
+      params['tip_comment']
+    ])
+  else 
+    sql = "INSERT INTO tips (track_id, tip_amount, publisher_id) VALUES ($1, $2, $3);"
+    run_sql(sql, [
+    params['track_id'],
+    params['tip_amount'],
+    params['publisher_id']
+  ])
+  end
+  redirect "tracks/#{params['track_id']}"
 end
 
 

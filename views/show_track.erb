@@ -7,6 +7,17 @@
 
 <form action="/tips" method="post">
     <label for="tip">Support artist, leave a tip:</label>
-    <input type="number" name="tip">
+    <input type="number" name="tip_amount" id="tip" step=".01" placeholder="1.00">
+    
+    <% if logged_in? %>
+        <label for="tip_comment">Add a comment:</label>
+        <input type="text" name="tip_comment" id="tip_comment">
+    <% end %>
 
+    <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+    <input type="hidden" name="track_id" value="<%= track["id"] %>">
+    <input type="hidden" name="publisher_id" value="<%= publisher["id"] %>"> 
+    <button>submit</button>
 </form>
+
+<!-- ADDING IN THE TIP PARAMS  up to user_id-->
