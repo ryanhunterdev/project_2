@@ -8,3 +8,17 @@ def run_sql(sql, params = [])
     return res
 end          
 
+def logged_in? 
+    !!session[:user_id] 
+end
+  
+def current_user 
+    if logged_in?
+      return run_sql("SELECT * from users where id = #{session[:user_id]};")[0]
+    end
+end
+
+def grab_response(table, id)
+    res = run_sql("SELECT * from #{table} where id = $1;", [id])
+    return res[0]
+end

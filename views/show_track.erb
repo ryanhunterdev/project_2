@@ -1,0 +1,12 @@
+<h1><%= track["track_name"] %></h1>
+<h2><%= publisher["user_name"] %></h2>
+<p>Genre: <%= track["genre"] %></p>
+<img src="<%= track["track_img"]%>" alt="<%= track["track_name"] %>" class="track-page-img">
+
+<p><%= track["track_info"] %></p>
+
+<form action="/tips" method="post">
+    <label for="tip">Support artist, leave a tip:</label>
+    <input type="number" name="tip">
+
+</form>

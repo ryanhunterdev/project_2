@@ -7,8 +7,9 @@
         <a href="/tracks/<%= track["id"] %>"> 
             <%= track["track_name"] %>
         </a>
+        <p><%= track["id"] %></p>
     </h2>
 
-    <img src="<%= track["image_url"]%>" alt="image">
+    <img src="<%= track["track_img"]%>" alt="image" class="feed-track-img">
 
 <% end %>
