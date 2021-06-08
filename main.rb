@@ -3,7 +3,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pg'
 require 'bcrypt'
-require 'pry'
+require 'pry' if development?
 
 require_relative 'db/helpers.rb'
 
