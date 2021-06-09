@@ -7,31 +7,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>
-    <a href="/"> 
-      $electa
-    </a>
-  </h1>
+  <header class="layout-header">
+    <h1>
+      <a href="/"> 
+        $electa
+      </a>
+    </h1>
 
-   <% if logged_in? %> 
-    
-    logged in as <a href="/users/<%= session[:user_id] %>"><%= current_user['user_name'] %></a>
-
-    <form action="/session" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button>logout</button>
-    </form>
-
-  <% else %>
-  
-    <form action="/login">
+    <% if logged_in? %> 
       
-      <button>login</button>
-    </form>
+      logged in as <a href="/users/<%= session[:user_id] %>"><%= current_user['user_name'] %></a>
+
+      <form action="/session" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button>logout</button>
+      </form>
+
+    <% else %>
     
-  <% end %>
+      <form action="/login">
+        
+        <button>login</button>
+      </form>
+      
+    <% end %>
+</header>
+<nav class="nav-column">
+  <ul class="nav-list">
 
+    <li class="nav-item">
+      <a href="/tracks" class="nav-link">all tracks</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="/tracks/new" class="nav-link">share music</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link">about</a>
+    </li>
+
+  </ul>
+</nav>
+
+<div class="main-content-column">
   <%= yield %>
-
+</div>
+  
+<script src="/javascripts/application.js"></script>
 </body>
 </html>

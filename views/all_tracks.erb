@@ -1,1 +1,23 @@
 <h1>all tracks</h1>
+
+<section class="all-tracks-feed">
+
+    <% tracks.each do |track| %>
+        <div class="all-tracks-container">
+
+                <a href="/tracks/<%= track["id"] %>">
+                    <img src="<%= track["track_img"]%>" alt="image" class="feed-track-img">
+                </a>
+                <a href="/tracks/<%= track["id"] %>"> 
+                    <%= track["track_name"] %>
+                </a>
+                    by 
+                <a href="/users/<%= track["user_id"] %>">
+                    <%= track["track_publisher_name"] %>
+                </a>
+            </p>   
+                
+        </div>
+
+    <% end %>
+</section>

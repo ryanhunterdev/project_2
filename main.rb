@@ -231,13 +231,16 @@ put '/track_img/:id' do
   redirect "tracks/#{params["id"]}"
 end
 
-
 delete '/tracks/:id' do
   redirect '/user/:id'
 end
 
-get 'tracks' do
-  erb :all_tracks
+get '/tracks' do
+  tracks = run_sql("Select * from tracks ORDER BY track_name;")
+  # binding.pry
+  erb :all_tracks, locals: {
+    tracks: tracks
+  }
 end
 
 ########################
