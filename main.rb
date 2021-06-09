@@ -1,9 +1,14 @@
-     
+# require 'active_support' # for cl_image_tag
+# require 'action_view' # for cl_image_tag
+
+# include CloudinaryHelper # for cl_image_tag     
+
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pg'
 require 'bcrypt'
 require 'pry' if development?
+require 'cloudinary'
 
 require_relative 'db/helpers.rb'
 
@@ -64,11 +69,46 @@ end
 ########################
 
 get '/tracks/new' do
-  erb :new_track_form
+  if logged_in?
+    erb :new_track_form
+  else 
+    invalid_login = "Please log-in or sign-up to share tracks"
+    erb :login, locals: { 
+    invalid_login: invalid_login,
+    session: session
+  }
+  end
 end
 
+audio_options = {
+    cloud_name: "ryanhunterdev",
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET'],
+    resource_type: "video"
+}
+
+image_options = {
+    cloud_name: "ryanhunterdev",
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET'],
+}
+
 post '/tracks' do
-  redirect '/users/:id'
+  redirect '/login' unless logged_in?
+  audio_res = Cloudinary::Uploader.upload(params['track_audio']['tempfile'], audio_options)
+  image_res = Cloudinary::Uploader.upload(params['track_artwork']['tempfile'], image_options)
+  # binding.pry
+  sql = "INSERT INTO tracks (user_id, track_audio, track_name, track_img, track_info, purchase_link, genre) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+  run_sql(sql, [
+    params["user_id"],
+    audio_res["url"],
+    params["track_name"],
+    image_res["url"],
+    params["track_info"],
+    params["purchase_link"],
+    params["genre"]
+  ])
+  redirect "/users/#{session[:user_id]}"
 end
 
 get '/tracks/:id' do

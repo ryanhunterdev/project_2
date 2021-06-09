@@ -16,7 +16,7 @@ Interactive column
 ------------------------------>
 
 <div class="user-interactive-column">
-
+    
     <img src="<%= user["user_img"] %>" alt="" class="user-img">
 
     <% if session[:user_id] == user["id"] %>
@@ -41,7 +41,7 @@ User profile
 
 ------------------------------>
 <div class="user-info-column">
-
+    <h3 class="user-profile-heading">Profile</h3>
     <section class="user-profile">
         <p class="profile-location">Location: <%= user["user_location"] %></p>
         <p class="profile-text">
@@ -86,6 +86,7 @@ User tracks
 
 ------------------------------>
 <div class="user-tracks-column">
+    <h3 class="user-tracks-heading"><%= user["user_name"] %>'s tracks:</h3>
     <section class="user-tracks-grid">
         <% tracks.each do |track| %>
         <div class="user-track-container">
@@ -95,7 +96,7 @@ User tracks
                 </a>
                 <p><%= track["id"] %></p>
             </h2>
-            
+
             <img 
             src="<%= track["track_img"]%>" 
             alt="image" 

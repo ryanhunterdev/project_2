@@ -1,0 +1,31 @@
+<h2>create new track</h2>
+
+<form action="/tracks" method="post" enctype="multipart/form-data"> 
+
+    <!-- hidden inputs -->
+    <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+
+    <!-- user inputs -->
+    <label for="track_name">track name:</label>
+    <input type="text" name="track_name">
+
+    <label for="genre">genre:</label>
+    <input type="text" name="genre"> 
+
+    <label for="track_audio">add track</label>
+    <input type="file" name="track_audio">
+
+    <label for="track_artwork">add artwork</label>
+    <input type="file" name="track_artwork">
+
+    
+    <label for="track_info">track info:</label>
+    <input type="text" name="track_info">
+
+    <label for="purchase_link">buy link:</label>
+    <input type="text" name="purchase_link">
+    
+    
+    <button>share track</button>
+
+</form>
