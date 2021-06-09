@@ -12,8 +12,15 @@ Interactive column
 
     <img src="<%= track["track_img"]%>" alt="<%= track["track_name"] %>" class="track-img">
 
+    <audio controls controlsList="nodownload" preload="auto" type="audio/mpeg">
+	<source src="<%= track["track_audio"] %>" type="audio/mpeg">
+	Your browser does not support the audio element.
+    </audio>
+
     <div class="track-input-tips">
         <form action="/tips" method="post">
+
+            <!-- user inputs -->
             <label for="tip">Support artist, leave a tip:</label>
             <input type="number" name="tip_amount" id="tip" step=".01" placeholder="1.00">
 
@@ -22,13 +29,16 @@ Interactive column
                 <input type="text" name="tip_comment" id="tip_comment">
             <% end %>
 
+            <!-- hidden inputs -->
             <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
             <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
             <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
             <input type="hidden" name="track_id" value="<%= track["id"] %>">
             <input type="hidden" name="track_name" value="<%= track["track_name"] %>">
             <input type="hidden" name="track_publisher_id" value="<%= publisher["id"] %>"> 
+
             <button>submit</button>
+
         </div>
 
         <div class="track-edit-delete">

@@ -12,7 +12,7 @@ genres = "dub downtempo house techno balaeric street-soul boogie disco hard-meta
     genre = genres.sample
     track_info = "A #{names1.sample} #{genre} #{names2.sample}. Hope you dig"
     purchase_link = "https://buttersessions.bandcamp.com/album/digi-modes"
-    track_audio = "http://track-audio.com"
+    track_audio = "http://res.cloudinary.com/ryanhunterdev/video/upload/v1623214129/usadb8bdkkaf8rpiwjvu.mp3"
 
     sql = "insert into tracks (user_id, track_name, track_img, track_info, purchase_link, genre, track_audio) values ($1, $2, $3, $4, $5, $6, $7)"
     run_sql(sql, [

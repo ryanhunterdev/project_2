@@ -32,7 +32,18 @@ get '/users/new' do
 end
 
 post '/users' do
-  redirect '/users/:id'
+
+  password = params["password"]
+  password_digest = BCrypt::Password.create(password)
+
+  sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4)"
+  run_sql(sql, [
+    params['user_name'],
+    params['email'],
+    password_digest,
+    params['user_img']
+])
+  redirect '/login'
 end
 
 get '/users/:id' do
