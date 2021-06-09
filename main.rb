@@ -232,7 +232,7 @@ put '/track_img/:id' do
 end
 
 delete '/tracks/:id' do
-  redirect '/user/:id'
+  redirect "/users/#{session[:user_id]}"
 end
 
 get '/tracks' do

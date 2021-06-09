@@ -63,3 +63,25 @@ main
 .user-track-img {
     width: 15vw;
 }
+
+.delete-modal {
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    display: none; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: 1s ease;
+}
+
+.reveal-modal {
+    display: grid;
+    transition: 1s ease;
+}

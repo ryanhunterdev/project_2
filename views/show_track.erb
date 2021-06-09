@@ -48,16 +48,26 @@ Interactive column
                     edit
                 </a>   
 
-                <form action="/tracks/<%= track["id"] %>" method="post">
-                <input type="hidden" name="_method" value="delete">
+                
                 <button class="delete-btn">
                     delete
                 </button>
                     
-                </form>
-            <% end %>
+               
+            <% end %> 
         </div>
     </div>
+</div>
+
+<div class="delete-modal">
+    deleting can't be undone, are you sure?
+        <form action="/tracks/<%= track["id"] %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button class="delete-btn">
+            yeah, delete it!
+        </button>
+    </form>
+    <button class="close-delete-modal">ok nah leave it be</button>
 </div>
 
 <!-----------------------------
