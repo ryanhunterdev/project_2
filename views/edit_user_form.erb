@@ -1,7 +1,7 @@
 
 <h2>edit account</h2>
 
-<form action="/users/<%= session[:user_id] %>" method="post" enctype="multipart/form-data"> 
+<form action="/users/<%= session[:user_id] %>" method="post"> 
     <input type="hidden" name="_method" value="put">
 
     <!-- user inputs -->
@@ -29,7 +29,7 @@
 
 <h2>update profile image</h2>
 
-<form action="/images/<%= session[:user_id] %>" method="post" enctype="multipart/form-data"> 
+<form action="/user_images/<%= session[:user_id] %>" method="post" enctype="multipart/form-data"> 
     <input type="hidden" name="_method" value="put">
 
     <label for="user_img">upload file</label>

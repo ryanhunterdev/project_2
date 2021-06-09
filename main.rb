@@ -61,7 +61,7 @@ post '/users' do
   password = params["password"]
   password_digest = BCrypt::Password.create(password)
 
-  sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4)"
+  sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4);"
   run_sql(sql, [
     params['user_name'],
     params['email'],
@@ -87,7 +87,9 @@ get '/users/:id' do
 end
 
 get '/users/:id/edit' do
+  current_user = session[:user_id]
   redirect '/login' unless logged_in?
+  redirect "/users/#{current_user}" unless current_user == params["id"]
   user = grab_response_by_id("users", session[:user_id])
   erb :edit_user_form, locals: {
     user: user
@@ -98,7 +100,7 @@ put '/users/:id' do
   redirect '/login' unless logged_in?
   password = params["password"]
   password_digest = BCrypt::Password.create(password)
-  sql = "UPDATE users SET user_name = $1, email = $2, password_digest = $3, user_bio = $4, user_link = $5, user_location = $6 WHERE id = $7"  
+  sql = "UPDATE users SET user_name = $1, email = $2, password_digest = $3, user_bio = $4, user_link = $5, user_location = $6 WHERE id = $7;"  
   run_sql(sql, [
     params["user_name"],
     params["email"],
@@ -111,10 +113,10 @@ put '/users/:id' do
   redirect "/users/#{session[:user_id]}"
 end
 
-put '/images/:id' do
+put '/user_images/:id' do
   redirect '/login' unless logged_in?
   image_res = Cloudinary::Uploader.upload(params['user_img']['tempfile'], image_options)
-  sql = "update users set user_img = $1 where id = $2"
+  sql = "update users set user_img = $1 where id = $2;"
   run_sql(sql, [
     image_res["url"],
     params["id"]
@@ -147,10 +149,13 @@ end
 
 post '/tracks' do
   redirect '/login' unless logged_in?
+
   audio_res = Cloudinary::Uploader.upload(params['track_audio']['tempfile'], audio_options)
   image_res = Cloudinary::Uploader.upload(params['track_artwork']['tempfile'], image_options)
-  # binding.pry
+
+
   sql = "INSERT INTO tracks (user_id, track_audio, track_name, track_img, track_info, purchase_link, genre) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+
   run_sql(sql, [
     params["user_id"],
     audio_res["url"],
@@ -181,12 +186,51 @@ get '/tracks/:id' do
 end
 
 get '/tracks/:id/edit' do
-  erb :edit_track_form
+  current_user = session[:user_id]
+  track = grab_response_by_id("tracks", params["id"])
+
+  redirect '/login' unless logged_in?
+  redirect "/tracks/#{params["id"]}" unless current_user == track["user_id"]
+
+
+  erb :edit_track_form, locals: {
+    track: track
+  }
 end
 
 put '/tracks/:id' do
-  redirect 'tracks/:id'
+  redirect '/login' unless logged_in?
+  sql = "UPDATE tracks SET track_name = $1, genre = $2, track_info = $3, purchase_link = $4 WHERE id = $5;"  
+  run_sql(sql, [
+    params["track_name"],
+    params["genre"],
+    params["track_info"],
+    params["purchase_link"],
+    params["id"]
+  ])
+  redirect "tracks/#{params["id"]}"
 end
+
+put '/audio/:id' do
+  audio_res = Cloudinary::Uploader.upload(params['track_audio']['tempfile'], audio_options)
+  sql = "update tracks set track_audio = $1 where id = $2;"
+  run_sql(sql, [
+    audio_res["url"],
+    params["id"]
+  ])
+  redirect "tracks/#{params["id"]}"
+end
+
+put '/track_img/:id' do
+  image_res = Cloudinary::Uploader.upload(params['track_artwork']['tempfile'], image_options)
+  sql = "update tracks set track_img = $1 where id = $2;"
+  run_sql(sql, [
+    image_res["url"],
+    params["id"]
+  ])
+  redirect "tracks/#{params["id"]}"
+end
+
 
 delete '/tracks/:id' do
   redirect '/user/:id'

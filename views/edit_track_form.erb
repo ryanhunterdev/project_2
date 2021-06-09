@@ -1,0 +1,40 @@
+<h2>edit track details</h2>
+
+<form action="/tracks/<%= track["id"] %>" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="_method" value="put">
+
+    <!-- user inputs -->
+    <label for="track_name">track name:</label>
+    <input type="text" name="track_name" value="<%= track["track_name"]%>">
+
+    <label for="genre">genre:</label>
+    <input type="text" name="genre" value="<%= track["genre"]%>"> 
+   
+    <label for="track_info">track info:</label>
+    <input type="text" name="track_info" value="<%= track["track_info"]%>">
+
+    <label for="purchase_link">buy link:</label>
+    <input type="text" name="purchase_link" value="<%= track["purchase_link"]%>">
+    
+    
+    <button>updatetrack</button>
+
+</form>
+
+<h2>edit track artwork</h2>
+
+<form action="/track_img/<%= track["id"] %>" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="_method" value="put">
+    <label for="track_artwork">upload artwork</label>
+    <input type="file" name="track_artwork">
+    <button>submit</button>
+</form>
+
+<h2>edit audio file</h2>
+
+<form action="/audio/<%= track["id"] %>" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="_method" value="put">
+    <label for="track_audio">upload track</label>
+    <input type="file" name="track_audio">
+    <button>submit</button>
+</form>
