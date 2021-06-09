@@ -43,6 +43,10 @@ User profile
 <div class="user-info-column">
 
     <section class="user-profile">
+        <p class="profile-location">Location: <%= user["user_location"] %></p>
+        <p class="profile-text">
+            <%= user["user_bio"] %>
+        </p>
     </section>
 
 
@@ -50,16 +54,19 @@ User profile
 
 User tips
 
+------------------------------>
+
     <section class="user-tips">
     <h3 class="tip-heading"><%= user["user_name"] %> supports:</h3>
 
         <% tips.each do |tip| %>
-            <div class="tip-container">
+         
                 <p class="tip-text">
                 
-                <%= %>
-                    <a href="" class="tip-anchor"></a>
-                    
+              
+                    <a href="/tracks/<%= tip["track_id"] %>" class="tip-anchor"><%= tip["track_name"] %></a>
+                    by 
+                    <a href="/tracks/<%= tip["track_publisher_id"] %>" class="tip-anchor"><%= tip["track_publisher_name"] %></a>
         
                 </p>
                 <p class="tip-comment-text">
@@ -72,8 +79,6 @@ User tips
     </section>
 
 </div>
------------------------------->
-
 
 <!-----------------------------
 
@@ -81,5 +86,23 @@ User tracks
 
 ------------------------------>
 <div class="user-tracks-column">
+    <section class="user-tracks-grid">
+        <% tracks.each do |track| %>
+        <div class="user-track-container">
+            <h2>
+                <a href="/tracks/<%= track["id"] %>"> 
+                    <%= track["track_name"] %>
+                </a>
+                <p><%= track["id"] %></p>
+            </h2>
+            
+            <img 
+            src="<%= track["track_img"]%>" 
+            alt="image" 
+            class="user-track-img">
 
+        </div>
+
+    <% end %>
+    </section>
 </div>

@@ -12,10 +12,10 @@
       $electa
     </a>
   </h1>
-  
+
    <% if logged_in? %> 
     
-    logged in as <%= current_user['user_name'] %>
+    logged in as <a href="/users/<%= session[:user_id] %>"><%= current_user['user_name'] %></a>
 
     <form action="/session" method="post">
       <input type="hidden" name="_method" value="delete">

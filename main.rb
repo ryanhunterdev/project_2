@@ -34,9 +34,9 @@ get '/users/:id' do
   id =  params["id"]
 
   user = grab_response_by_id("users", id)
-  tracks = grab_response_by_id("tracks", id)
-  tips = tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
-
+  tracks = run_sql("SELECT * from tracks where user_id = $1;", [id])
+  tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
+ 
   erb :show_user, locals: {
     user: user,
     tracks: tracks,

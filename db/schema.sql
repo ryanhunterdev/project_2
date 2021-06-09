@@ -9,7 +9,8 @@ CREATE TABLE users (
     email TEXT,
     user_img TEXT, 
     user_bio TEXT,
-    user_link TEXT
+    user_link TEXT,
+    user_location TEXT
 );
 
 CREATE TABLE tracks (
