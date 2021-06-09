@@ -78,10 +78,18 @@ main
     background: white;
     border: 1px solid black;
     border-radius: 10px;
-    transition: 1s ease;
 }
 
 .reveal-modal {
     display: grid;
-    transition: 1s ease;
+    animation: fade-in ease 0.3s;
+}
+
+@keyframes fade-in {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
 }

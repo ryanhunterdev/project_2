@@ -232,6 +232,15 @@ put '/track_img/:id' do
 end
 
 delete '/tracks/:id' do
+  sql_tracks = "delete from tracks where id = $1;"
+  sql_tips = "delete from tips where track_id = $1;"
+  id = params["id"]
+  run_sql(sql_tracks, [
+    params["id"]
+  ])
+  run_sql(sql_tips, [
+    params["id"]
+  ])
   redirect "/users/#{session[:user_id]}"
 end
 
