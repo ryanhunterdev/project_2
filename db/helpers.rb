@@ -18,7 +18,7 @@ def current_user
     end
 end
 
-def grab_response(table, id)
+def grab_response_by_id(table, id)
     res = run_sql("SELECT * from #{table} where id = $1;", [id])
     return res[0]
 end

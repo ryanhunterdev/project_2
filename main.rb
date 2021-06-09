@@ -31,7 +31,18 @@ post '/users' do
 end
 
 get '/users/:id' do
-  erb :show_user
+  id =  params["id"]
+
+  user = grab_response_by_id("users", id)
+  tracks = grab_response_by_id("tracks", id)
+  tips = tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
+
+  erb :show_user, locals: {
+    user: user,
+    tracks: tracks,
+    tips: tips,
+    session: session
+  }
 end
 
 get '/users/:id/edit' do
@@ -63,15 +74,12 @@ end
 get '/tracks/:id' do
 
   id =  params["id"]
-  track = grab_response("tracks", id)
+  track = grab_response_by_id("tracks", id)
 
-  publisher_id = track["user_id"]
-  res = run_sql("SELECT * from users where id = $1;", [publisher_id])
-  publisher = res[0]
-
+  publisher = grab_response_by_id("users", track["user_id"])
 
   tips = run_sql("SELECT * from tips where track_id = $1;", [id])
-  # binding.pry
+
   erb :show_track, locals: { 
     track: track,
     publisher: publisher,
@@ -104,21 +112,25 @@ end
 
 post '/tips' do 
   if logged_in?
-    sql = "INSERT INTO tips (track_id, tipper_id, tipper_name, tip_amount, track_publisher_id, tip_comment) VALUES ($1, $2, $3, $4, $5, $6);"
+    sql = "INSERT INTO tips (track_id, track_name, tipper_id, tipper_name, tip_amount, track_publisher_id, track_publisher_name, tip_comment) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);"
     run_sql(sql, [
       params['track_id'],
+      params['track_name'],
       params['tipper_id'],
       params['tipper_name'],
       params['tip_amount'],
       params['track_publisher_id'],
+      params['track_publisher_name'],
       params['tip_comment']
     ])
   else 
-    sql = "INSERT INTO tips (track_id, tip_amount, track_publisher_id) VALUES ($1, $2, $3);"
+    sql = "INSERT INTO tips (track_id, track_name, tip_amount, track_publisher_id, track_publisher_name) VALUES ($1, $2, $3, $4, $5);"
     run_sql(sql, [
     params['track_id'],
+    params['track_name'],
     params['tip_amount'],
-    params['track_publisher_id']
+    params['track_publisher_id'],
+    params['track_publisher_name']
   ])
   end
   redirect "tracks/#{params['track_id']}"
@@ -133,7 +145,7 @@ end
 
 get '/login' do
   invalid_login = ""
-    erb :login, locals: { invalid_login: invalid_login }
+  erb :login, locals: { invalid_login: invalid_login }
 end
 
 post '/session' do
@@ -144,7 +156,7 @@ post '/session' do
     logged_in_user = records[0]
     session[:user_id] = logged_in_user["id"]
     session[:user_name] = logged_in_user["user_name"]
-    redirect '/'
+    redirect "/users/#{session[:user_id]}"
   else
     invalid_login = "Invalid username or password. Please try again"
     erb :login, locals: { invalid_login: invalid_login }
@@ -153,5 +165,5 @@ end
 
 delete '/session' do
   session[:user_id] = nil
-  redirect '/'
+  redirect back
 end

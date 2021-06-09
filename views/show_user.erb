@@ -1,0 +1,85 @@
+<header class="show-user-header">
+    <h2>    
+        <% if session[:user_id] == user["id"] %>
+            My Account 
+        <% else %>
+            <%= user["user_name"] %>
+        <% end %>
+    </h2>
+    
+</header>
+
+<!-----------------------------
+
+Interactive column
+
+------------------------------>
+
+<div class="user-interactive-column">
+
+    <img src="<%= user["user_img"] %>" alt="" class="user-img">
+
+    <% if session[:user_id] == user["id"] %>
+        <a href="/users/<%= user["id"] %>/edit" class="edit-btn">
+            edit
+        </a>   
+
+        <form action="/users/<%= user["id"] %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button class="delete-btn">
+                delete
+            </button>
+                    
+        </form>
+    <% end %>
+
+</div>
+
+<!-----------------------------
+
+User profile
+
+------------------------------>
+<div class="user-info-column">
+
+    <section class="user-profile">
+    </section>
+
+
+<!-----------------------------
+
+User tips
+
+    <section class="user-tips">
+    <h3 class="tip-heading"><%= user["user_name"] %> supports:</h3>
+
+        <% tips.each do |tip| %>
+            <div class="tip-container">
+                <p class="tip-text">
+                
+                <%= %>
+                    <a href="" class="tip-anchor"></a>
+                    
+        
+                </p>
+                <p class="tip-comment-text">
+                    <%= tip["tip_comment"] %>
+                </p>
+            </div>
+       
+        <% end %>
+
+    </section>
+
+</div>
+------------------------------>
+
+
+<!-----------------------------
+
+User tracks
+
+------------------------------>
+<div class="user-tracks-column">
+
+</div>

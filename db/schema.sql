@@ -7,7 +7,7 @@ CREATE TABLE users (
     user_name TEXT,
     password_digest TEXT,
     email TEXT,
-    profile_img TEXT, 
+    user_img TEXT, 
     user_bio TEXT,
     user_link TEXT
 );
@@ -28,6 +28,7 @@ CREATE TABLE tips (
     tipper_id INTEGER,
     tipper_name TEXT,
     track_id INTEGER,
+    track_name TEXT,
     track_publisher_id INTEGER,
     track_publisher_name TEXT,
     tip_amount DECIMAL(10,2),
