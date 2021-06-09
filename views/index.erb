@@ -3,13 +3,13 @@
 <a href="/tracks/new">share a track</a>
 
 <% tracks.each do |track| %>
-    <h2>
+
         <a href="/tracks/<%= track["id"] %>"> 
             <%= track["track_name"] %>
+            <p>by <a href="/users/<%= track["user_id"] %>"><%= track["track_publisher_name"] %></a></p>
+           
+            <img src="<%= track["track_img"]%>" alt="image" class="feed-track-img">
         </a>
-        <p><%= track["id"] %></p>
-    </h2>
 
-    <img src="<%= track["track_img"]%>" alt="image" class="feed-track-img">
 
 <% end %>

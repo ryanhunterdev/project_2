@@ -21,7 +21,8 @@ CREATE TABLE tracks (
     track_info TEXT,
     purchase_link TEXT,
     genre TEXT,
-    track_audio TEXT 
+    track_audio TEXT,
+    track_publisher_name TEXT
 );
 
 CREATE TABLE tips (
