@@ -14,6 +14,31 @@ require_relative 'db/helpers.rb'
 
 enable :sessions
 
+########################
+
+# cloudinary options
+
+########################
+
+audio_options = {
+    cloud_name: "ryanhunterdev",
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET'],
+    resource_type: "video"
+}
+
+image_options = {
+    cloud_name: "ryanhunterdev",
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET'],
+}
+
+########################
+
+# routes
+
+########################
+
 get '/' do
   tracks = run_sql("Select * from tracks")
   erb :index, locals: {
@@ -62,11 +87,39 @@ get '/users/:id' do
 end
 
 get '/users/:id/edit' do
-  erb :edit_user_form
+  redirect '/login' unless logged_in?
+  user = grab_response_by_id("users", session[:user_id])
+  erb :edit_user_form, locals: {
+    user: user
+  }
 end
 
 put '/users/:id' do
-  redirect '/users/:id'
+  redirect '/login' unless logged_in?
+  password = params["password"]
+  password_digest = BCrypt::Password.create(password)
+  sql = "UPDATE users SET user_name = $1, email = $2, password_digest = $3, user_bio = $4, user_link = $5, user_location = $6 WHERE id = $7"  
+  run_sql(sql, [
+    params["user_name"],
+    params["email"],
+    password_digest,
+    params["user_bio"],
+    params["user_link"],
+    params["user_location"],
+    session[:user_id]
+  ])
+  redirect "/users/#{session[:user_id]}"
+end
+
+put '/images/:id' do
+  redirect '/login' unless logged_in?
+  image_res = Cloudinary::Uploader.upload(params['user_img']['tempfile'], image_options)
+  sql = "update users set user_img = $1 where id = $2"
+  run_sql(sql, [
+    image_res["url"],
+    params["id"]
+  ])
+  redirect "/users/#{session[:user_id]}"
 end
 
 delete '/users/:id' do
@@ -91,18 +144,6 @@ get '/tracks/new' do
   end
 end
 
-audio_options = {
-    cloud_name: "ryanhunterdev",
-    api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET'],
-    resource_type: "video"
-}
-
-image_options = {
-    cloud_name: "ryanhunterdev",
-    api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET'],
-}
 
 post '/tracks' do
   redirect '/login' unless logged_in?

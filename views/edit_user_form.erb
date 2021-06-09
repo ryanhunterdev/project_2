@@ -1,0 +1,38 @@
+
+<h2>edit account</h2>
+
+<form action="/users/<%= session[:user_id] %>" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="_method" value="put">
+
+    <!-- user inputs -->
+    <label for="user_name">username:</label>
+    <input type="text" name="user_name" value="<%= user['user_name'] %>">
+
+    <label for="email">email:</label>
+    <input type="text" name="email" value="<%= user['email'] %>"> 
+
+    <label for="password">password:</label>
+    <input type="password" name="password">
+
+    <label for="user_bio">bio:</label>
+    <input type="text" name="user_bio" value="<%= user['user_bio'] %>">   
+
+    <label for="user_link">webpage:</label>
+    <input type="text" name="user_link" value="<%= user['user_link'] %>"> 
+
+    <label for="user_location">location:</label>
+    <input type="text" name="user_location" value="<%= user['user_location'] %>">
+    
+    <button>save changes</button>
+
+</form>
+
+<h2>update profile image</h2>
+
+<form action="/images/<%= session[:user_id] %>" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="_method" value="put">
+
+    <label for="user_img">upload file</label>
+    <input type="file" name="user_img">
+    <button>submit</button>
+</form>
