@@ -26,10 +26,18 @@ a:hover {
 .header-logo {
     font-size: 6rem;
     padding-left: 1rem;
+    text-decoration: none;
+    transition: .3s;
 }
 
-.header-logo > a {
-    text-decoration: none;
+.nav-link {
+    transition: .3s;
+}
+
+.header-logo:hover,
+.nav-link:hover {
+    color: rgb(174, 4, 4);
+    transition: .3s;
 }
 
 .header-bottom-row {
