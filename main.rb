@@ -45,7 +45,7 @@ image_options = {
 ########################
 
 get '/' do
-  tracks = run_sql("Select * from tracks")
+  tracks = run_sql("Select * from tracks ORDER by id desc")
   erb :index, locals: {
     tracks: tracks
   }
@@ -84,7 +84,7 @@ get '/users/:id' do
   id =  params["id"]
 
   user = grab_response_by_id("users", id)
-  tracks = run_sql("SELECT * from tracks where user_id = $1;", [id])
+  tracks = run_sql("Select * from tracks where user_id = $1 ORDER by id desc;", [id])
   tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
   tip_count = total_tips(tips)
 

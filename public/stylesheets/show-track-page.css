@@ -142,7 +142,8 @@ show track page
 }
 
 .tip-anchor:hover,
-.publisher-heading:hover {
+.publisher-heading:hover,
+.profile-anchor:hover {
     color: var(--hover-text);
     transition: .3s;
 }

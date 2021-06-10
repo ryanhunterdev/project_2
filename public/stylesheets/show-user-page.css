@@ -36,6 +36,7 @@ show user page
     margin: 0 auto;
     max-width: 1700px;
     gap: 5%;
+    height: 100vh;
 }
 
 .user-img {
@@ -45,7 +46,7 @@ show user page
 
 .user-info-column {
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: min-content min-content;
     gap: 2%;
 }
 
@@ -60,6 +61,7 @@ show user page
 }
 
 .user-tracks-grid {
+    padding-top: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 5%;
@@ -83,6 +85,15 @@ show user page
     text-align: center;
 }
 
+.profile-text {
+    padding-bottom: .5rem;
+}
+
+.profile-anchor {
+    font-weight: 600;
+    transition: .3s;
+}
+
 @media (max-width: 805px) {
     .user-page-grid {
     padding: 0 5rem;
@@ -92,7 +103,7 @@ show user page
     grid-template-rows: .5fr 1fr 1fr;
     margin: 0 auto;
     max-width: 1700px;
-    gap: 1%;
+    gap: 2%;
     }
 }
 
@@ -130,6 +141,10 @@ show user page
 @media (max-width: 400px) {
     .user-page-grid {
         font-size: 1.3rem;
+    }
+
+    .user-tracks-grid {
+        gap: 2%;
     }
     
 }
