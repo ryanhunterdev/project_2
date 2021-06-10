@@ -15,3 +15,5 @@ function closeModal() {
 deleteBtn.addEventListener("click", revealModal);
 closeDeleteModal.addEventListener("click", closeModal);
 
+
+

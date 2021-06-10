@@ -22,3 +22,11 @@ def grab_response_by_id(table, id)
     res = run_sql("SELECT * from #{table} where id = $1;", [id])
     return res[0]
 end
+
+def total_tips(tips)
+    total = 0
+    tips.each do |tip|
+      total += tip["tip_amount"].to_f
+    end
+    total
+end

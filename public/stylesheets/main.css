@@ -1,51 +1,136 @@
 /************************
 
-universal
+global
 
-*************************/
+************************/
 
-html,body,div,p,
-h1,h2,h3,h4,h5,h6,
-ul,ol,li,
-dl,dt,dd,
-form,fieldset,caption,
-table,tr,td,th,
-address,blockquote,img {
-	margin:0;
-	padding:0;
+* {
+    --background-color: white;
+    --main-text-color: black;
+    --setup-border: 1px solid black;
+    font-family: 'Work Sans', sans-serif;
 }
 
-img, fieldset {
-	border:none;
-}
+a {
+    color: black;
 
-*, *:after, *:before {
-	box-sizing:border-box;
-}
-
-hr {
-	display:none;
-}
-
-/* disables scrolling on the body
- html, body {
-	height:100%;
-	overflow:hidden;
-} */
-
-body, button, input, table, textarea, select {
-	font:normal 1em/1.5 "segoe UI",helvetica,sans-serif;
-}
-
-h2, h3, h4, h5, h6 {
-	line-height:1.25;
 }
 
 /************************
 
-main
+header
 
 ************************/
+
+.main-header {
+    width: 100%;
+    position: fixed;
+    height: 14rem;
+    background-color: var(--background-color);
+    z-index: 2;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.header-top-row {
+    border-bottom: var(--setup-border);
+}
+
+.header-logo {
+    font-size: 6rem;
+    padding-left: 1rem;
+}
+
+.header-logo > a {
+    text-decoration: none;
+}
+
+.header-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 2rem;
+    border-bottom: var(--setup-border);
+}
+
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.nav-list {
+    padding: 5px;
+}
+
+.nav-item {
+    display: inline;
+    padding: 1rem;
+}
+
+.login-status {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 1rem;
+}
+
+.login-button {
+    border: none;
+    background: none;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    
+}
+
+@media (max-width: 700px) {
+    .header-logo {
+        font-size: 5rem;
+        text-align: center;
+    }
+    .header-bottom-row {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+        font-size: 1.8rem;
+    }
+    nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        align-content: space-around;
+    }
+    .login-status {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        border-top: var(--setup-border)
+    }
+}
+/************************
+
+page content
+
+************************/
+
+.page-content {
+    position: relative;
+    top: 12rem;
+    overflow: auto;
+    z-index:1;
+    border: var(--setup-border);
+}
+
+
+
+
+
+
 
 
 .feed-track-img {
