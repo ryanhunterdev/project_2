@@ -1,0 +1,124 @@
+/************************
+
+show user page
+
+************************/
+
+.user-header {
+    text-align: center;
+    padding: 2rem;
+}
+
+.user-header > h2 {
+    font-size: 3rem;
+}
+
+.user-profile-heading {
+    font-size: 2rem;
+    padding-bottom: .5rem;
+}
+
+.edit-options {
+    display: flex;
+    text-align: centre;
+}
+
+.profile-location {
+    padding-bottom: .5rem;
+}
+
+.user-page-grid {
+    padding: 0 5rem;
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    margin: 0 auto;
+    max-width: 1700px;
+    gap: 5%;
+}
+
+.user-img {
+    width: 100%;
+}
+
+.user-info-column {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 2%;
+}
+
+.user-profile, .user-tips {
+    background-color: var(--subtle-grey);
+    padding: 2rem;
+}
+
+.tip-text {
+    padding-bottom: .5rem;
+}
+
+.user-tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 5%;
+}
+
+.user-track-container {
+    transition: .3s;
+}
+
+.user-track-container:hover {
+    transform: scale(1.1);
+    transition: .3s;
+}
+
+.user-track-img {
+    width: 100%;
+}
+
+.tip_count {
+    padding-top: .5rem;
+}
+
+@media (max-width: 805px) {
+    .user-page-grid {
+    padding: 0 5rem;
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: none;
+    grid-template-rows: .5fr 1fr 1fr;
+    margin: 0 auto;
+    max-width: 1700px;
+    gap: 1%;
+    }
+}
+
+.delete-modal {
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    display: none; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.reveal-modal {
+    display: grid;
+    animation: fade-in ease 0.3s;
+}
+
+@keyframes fade-in {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+}

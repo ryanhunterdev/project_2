@@ -14,104 +14,13 @@ global
 
 a {
     color: black;
-
 }
 
-/************************
-
-header
-
-************************/
-
-.main-header {
-    width: 100%;
-    position: fixed;
-    height: 14rem;
-    background-color: var(--background-color);
-    z-index: 2;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+a:hover {
+    transform: scale(1.2);
 }
 
-.header-top-row {
-    border-bottom: var(--setup-border);
-}
 
-.header-logo {
-    font-size: 6rem;
-    padding-left: 1rem;
-}
-
-.header-logo > a {
-    text-decoration: none;
-}
-
-.header-bottom-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    font-size: 2rem;
-    border-bottom: var(--setup-border);
-}
-
-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.nav-list {
-    padding: 5px;
-}
-
-.nav-item {
-    display: inline;
-    padding: 1rem;
-}
-
-.login-status {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    flex-direction: column;
-    padding-right: 1rem;
-}
-
-.login-button, .delete-btn,  .close-delete-modal{
-    border: none;
-    background: none;
-    font-size: inherit;
-    cursor: pointer;
-    text-decoration: underline
-    
-}
-
-@media (max-width: 700px) {
-    .header-logo {
-        font-size: 5rem;
-        text-align: center;
-    }
-    .header-bottom-row {
-        display: grid;
-        grid-template-columns: none;
-        grid-template-rows: 1fr 1fr;
-        font-size: 1.8rem;
-    }
-    nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        align-content: space-around;
-    }
-    .login-status {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: center;
-        border-top: var(--setup-border)
-    }
-}
 /************************
 
 page content
@@ -122,80 +31,6 @@ page content
     position: relative;
     top: 14rem;
     z-index: 1;
-}
-
-/************************
-
-index
-
-************************/
-
-.index-wrapper {
-    display: grid;
-    display: grid;
-    grid-template-columns: 2fr 1.5fr;
-}
-
-.index-tracks-feed {
-    /* overflow: scroll; */
-    z-index: 2;
-    /* height: 80%; */
-    border-right: var(--setup-border);
-}
-
-.index-feed-heading, .all-tracks-heading {
-    font-size: 3rem;
-    text-align: center;
-    padding: 2rem;
-}
-
-.index-feed-grid {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-}
-
-.index-tracks-container {
-    display: flex;
-    /* border: var(--setup-border); */
-    flex-direction: column;
-    padding: 2rem 0;
-    align-items: center;
-}
-
-.tracks-image-container {
-    width: 80%;
-    border-top: var(--setup-border);
-    border-right: var(--setup-border);
-    border-left: var(--setup-border);
-}
-
-.feed-track-img {
-    width: 100%;
-}
-
-.tracks-info-container {
-    width: 80%;
-    border-bottom: var(--setup-border);
-    border-right: var(--setup-border);
-    border-left: var(--setup-border);
-    font-size: 1.5rem;
-    padding: .5rem;
-}
-
-.welcome-column {
-    text-align: center;
-    overflow: hidden;
-}
-
-.welcome-heading {
-    font-size: 3rem;
-    padding: 2rem;
-}
-
-.welcome-text {
-    font-size: 1.5rem;
-    padding: 2rem 5rem;
 }
 
 /************************
@@ -223,230 +58,84 @@ all tracks
 
 /************************
 
-show track page
+tracks new form
 
 ************************/
 
-.track-header {
+.new-track-wrapper {
+    display: grid;
+    place-items: center;
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.new-track-form {
+    font-size: 2rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--subtle-grey);
+}
+
+.new-track-heading {
+    font-size: 3rem;
     text-align: center;
     padding: 2rem;
 }
 
-.track-header > h2 {
-    font-size: 3rem;
+.normal-input, .upload-input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 50%;
+  font-size: 2rem;
+  border-radius: 5px;
 }
 
-.track-page-wrapper {
-    padding: 0 5rem;
-    font-size: 1.5rem;
-}
-
-.track-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 0 auto;
-    max-width: 1200px;
-    gap: 5%;
-}
-
-.track-interactive-column {
+.input-wrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-content: space-around;
+    margin: 1rem;
     align-items: center;
 }
 
-.track-img {
+.button-container {
     width: 100%;
-}
-
-.audio-controls {
-    width: 100%;
-}
-
-.track-edit-delete {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-.track-information-column {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 2rem;
-
-}
-
-.track-info {
-    background-color: var(--subtle-grey);
-    display: flex;
-    align-content: space-around;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 5rem;
-}
-
-.track-info-heading {
-    font-weight: bold;
-    padding-bottom: 1rem;
-}
-
-.track-info-text {
-    padding-bottom: 2rem;
-}
-
-.track-tips {
-    background-color: var(--subtle-grey);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 0 5rem;
-}
-
-.leave-tip-section {
-    display: flex;
-}
-
-.tip-input {
-    text-align: center;
-    width: 100%;
-    margin: 0.5rem;
-    float: right;
-}
-
-.tip-btn {
-  display: block;
-}
-
-.user-tip-section {
-    display: flex;
-    flex-direction: column;
-}
-
-.tip-container {
-    padding: 0.5rem;
-}
-
-.tip-anchor, .tip-comment {
-    font-weight: 600;
-}
-
-@media (max-width: 610px) {
-    .track-grid {
-        display: grid;
-        grid-template-columns: none;
-        margin: 0 auto;
-        max-width: 1200px;
-        gap: 2%;
-    }
-
-    .track-tips, .track-info {
-        padding: 2rem;
-    }
-
-    .track-header > h2 {
-        font-size: 2.5rem;
-    }
-}
-
-/************************
-
-show user page
-
-************************/
-
-.user-header {
-    text-align: center;
-    padding: 2rem;
-}
-
-.user-header > h2 {
-    font-size: 3rem;
-}
-
-.user-profile-heading {
-    font-size: 2rem;
-    padding-bottom: .5rem;
-}
-
-.edit-options {
-    display: flex;
-}
-
-.profile-location {
-    padding-bottom: .5rem;
-}
-
-.user-page-grid {
-    padding: 0 5rem;
-    font-size: 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    margin: 0 auto;
-    max-width: 1700px;
-    gap: 5%;
-}
-
-.user-img {
-    width: 100%;
-}
-.user-info-column {
-    display: grid;
-    grid-template-rows: 1fr;
-    gap: 2%;
-}
-
-.user-profile, .user-tips {
-    background-color: var(--subtle-grey);
-    padding: 2rem;
-}
-
-.tip-text {
-    padding-bottom: .5rem;
-}
-
-.user-tracks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 5%;
-    
-}
-
-
-.user-track-img {
-    width: 100%;
-}
-
-.delete-modal {
-    position: absolute;
-    width: 300px;
-    height: 250px;
-    z-index: 1;
     display: grid;
     place-items: center;
-    display: none; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    font-size: 1.5rem;
+    margin-top: 1.5rem;
 }
 
-.reveal-modal {
-    display: grid;
-    animation: fade-in ease 0.3s;
+.share-track-btn {
+    font-size: 2rem;
+    border: none;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+.share-track-btn:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
 
-
-
-@keyframes fade-in {
-    0% {
-      opacity:0;
+@media (max-width: 600px) {
+    .input-wrap {
+        display: flex;
+        flex-direction: column;
     }
-    100% {
-      opacity:1;
+    .normal-input, .upload-input {
+        width: 90%;
     }
+
 }
+
+

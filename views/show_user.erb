@@ -17,6 +17,7 @@
 
         <div class="edit-options">
             <% if session[:user_id] == user["id"] %>
+     
                 <a href="/users/<%= user["id"] %>/edit" class="edit-btn">
                     edit profile
                 </a>   
@@ -32,10 +33,11 @@
                     </button>
                             
                 </form>
+         
             <% end %>
         </div>
         <% if session[:user_id] == user["id"] %>
-            <div class="tip_count">
+            <div class="tip-count">
                 <h3 class="tip-count">
                     your tips: $<%= tip_count %>
                 </h3>
