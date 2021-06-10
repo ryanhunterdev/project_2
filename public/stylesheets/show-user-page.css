@@ -21,6 +21,7 @@ show user page
 .edit-options {
     display: flex;
     text-align: centre;
+    justify-content: space-around;
 }
 
 .profile-location {

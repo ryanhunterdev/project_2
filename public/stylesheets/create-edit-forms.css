@@ -1,0 +1,156 @@
+/************************
+
+tracks new form
+
+************************/
+
+.new-track-wrapper, .new-user-wrapper {
+    display: grid;
+    place-items: center;
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.new-track-form, 
+.new-user-form, 
+.login-form, 
+.edit-user-form {
+    font-size: 2rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--subtle-grey);
+}
+
+.new-track-heading {
+    font-size: 3rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.normal-input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 50%;
+  font-size: 2rem;
+  border-radius: 5px;
+}
+
+.input-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-content: space-around;
+    margin: 1rem;
+    align-items: center;
+}
+
+.button-container {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    margin-top: 1.5rem;
+}
+
+.share-track-btn {
+    font-size: 2rem;
+    border: none;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.share-track-btn:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+    .input-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    .normal-input, .upload-input {
+        width: 90%;
+    }
+
+}
+
+/************************
+
+edit track form
+
+************************/
+
+.edit-track-wrapper {
+    font-size: 2rem;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    gap: 2%;
+}  
+
+.edit-subheading {
+    text-align: center;
+}
+
+.edit-assets-column, .edit-details-column {
+    background-color: var(--subtle-grey);
+    padding: 1.5rem;
+}
+
+.upload-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-content: space-around;
+    margin: 1rem;
+    align-items: center;
+}
+
+
+
+@media (max-width: 600px) {
+
+}
+
+
+/************************
+
+login form
+
+************************/
+
+.sign-up-link {
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+/************************
+
+edit user
+
+************************/
+
+.edit-user-wrapper {
+    font-size: 2rem;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    gap: 2%;
+} 
+
+.edit-img-form {
+    display: flex;
+    align-items: center;
+}

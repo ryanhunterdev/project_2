@@ -14,6 +14,11 @@ header
     grid-template-rows: 1fr 1fr;
 }
 
+a:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
 .header-top-row {
     border-bottom: var(--setup-border);
 }

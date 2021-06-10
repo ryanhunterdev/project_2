@@ -10,6 +10,7 @@
   <link rel='stylesheet' href='/stylesheets/index.css'>
   <link rel="stylesheet" href="/stylesheets/show-track-page.css">
   <link rel="stylesheet" href="/stylesheets/show-user-page.css">
+  <link rel="stylesheet" href="/stylesheets/create-edit-forms.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
@@ -48,7 +49,7 @@
       <div class="login-status">
         <% if logged_in? %> 
         <p> 
-          logged in as <a href="/users/<%= session[:user_id] %>"><%= current_user['user_name'] %></a>.
+          logged in as <a href="/users/<%= session[:user_id] %>"><%= current_user['user_name'] %></a>
         </p> 
           <form action="/session" method="post">
             <input type="hidden" name="_method" value="delete">

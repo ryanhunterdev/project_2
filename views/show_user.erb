@@ -22,10 +22,6 @@
                     edit profile
                 </a>   
 
-                <a href="/edit_user_image/<%= user["id"] %>/edit" class="edit-btn">
-                    edit avatar
-                </a> 
-
                 <form action="/users/<%= user["id"] %>" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="delete-btn">

@@ -1,18 +1,28 @@
 <h2>login</h2>
 
-<form action="/session" method="post">
+<div class="new-user-wrapper">
+    <form action="/session" method="post" class="login-form">
 
-    <label for="">email</label>
-    <input type="text" name="email">
+        <div class="input-wrap">
+            <label for="">email</label>
+            <input type="text" name="email" class="normal-input">
+        </div>
 
-    <label for="">password</label>
-    <input type="password" name="password" id="">
+        <div class="input-wrap">
+            <label for="">password</label>
+            <input type="password" name="password" id="" class="normal-input">
+        </div>
+        
+        <div class="invalid-login">
+            <%= invalid_login %>
+        </div>
 
-    <button>submit</button>
-    <div class="invalid-login">
-        <%= invalid_login %>
-    </div>
+        <div class="button-container">
+            <button class="share-track-btn">submit</button>
+        </div>
 
-</form>
+    </form>
 
-<a href="/users/new" class="sign-up-link">create account</a>
+    <a href="/users/new" class="sign-up-link">create account</a>
+
+</div>
