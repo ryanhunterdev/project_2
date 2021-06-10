@@ -1,4 +1,4 @@
-<header class="show-user-header">
+<header class="user-header">
     <h2>    
         <% if session[:user_id] == user["id"] %>
             My Account 
@@ -9,111 +9,94 @@
     
 </header>
 
-<!-----------------------------
-
-Interactive column
-
------------------------------->
-
-<div class="user-interactive-column">
-    
-    <img src="<%= user["user_img"] %>" alt="" class="user-img">
-
-    <% if session[:user_id] == user["id"] %>
-        <a href="/users/<%= user["id"] %>/edit" class="edit-btn">
-            edit profile
-        </a>   
-
-        <a href="/edit_user_image/<%= user["id"] %>/edit" class="edit-btn">
-            edit avatar
-        </a> 
-
-        <form action="/users/<%= user["id"] %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button class="delete-btn">
-                delete
-            </button>
-                    
-        </form>
-
-        <div class="tip_count">
-            <h3 class="tip-count">
-                your tips: $<%= tip_count %>
-            </h3>
-        </div>
-    <% end %>
-
-</div>
-
-<!-----------------------------
-
-User profile
-
------------------------------->
-<div class="user-info-column">
-    <h3 class="user-profile-heading">Profile</h3>
-    <section class="user-profile">
-        <p class="profile-location">Location: <%= user["user_location"] %></p>
-        <p class="profile-text">
-            <%= user["user_bio"] %>
-        </p>
-    </section>
-
-
-<!-----------------------------
-
-User tips
-
------------------------------->
-
-    <section class="user-tips">
-    <h3 class="tip-heading"><%= user["user_name"] %> supports:</h3>
-
-        <% tips.each do |tip| %>
-         
-                <p class="tip-text">
-                
-              
-                    <a href="/tracks/<%= tip["track_id"] %>" class="tip-anchor"><%= tip["track_name"] %></a>
-                    by 
-                    <a href="/tracks/<%= tip["track_publisher_id"] %>" class="tip-anchor"><%= tip["track_publisher_name"] %></a>
+<!------------- Interactive column ----------------->
+<div class="user-page-grid">
+    <div class="user-interactive-column">
         
+        <img src="<%= user["user_img"] %>" alt="" class="user-img">
+
+        <div class="edit-options">
+            <% if session[:user_id] == user["id"] %>
+                <a href="/users/<%= user["id"] %>/edit" class="edit-btn">
+                    edit profile
+                </a>   
+
+                <a href="/edit_user_image/<%= user["id"] %>/edit" class="edit-btn">
+                    edit avatar
+                </a> 
+
+                <form action="/users/<%= user["id"] %>" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="delete-btn">
+                        delete
+                    </button>
+                            
+                </form>
+            <% end %>
+        </div>
+        <% if session[:user_id] == user["id"] %>
+            <div class="tip_count">
+                <h3 class="tip-count">
+                    your tips: $<%= tip_count %>
+                </h3>
+            </div>
+        <% end %>
+        
+    </div>
+
+    <!------------- User profile ------------------>
+   
+    <div class="user-info-column">
+        <section class="user-profile">
+            <h3 class="user-profile-heading">Profile</h3>
+            <p class="profile-location">Location: <%= user["user_location"] %></p>
+            <p class="profile-text">
+                <%= user["user_bio"] %>
+            </p>
+        </section>
+        <section class="user-tips">
+            <h3 class="user-profile-heading"><%= user["user_name"] %> supports:</h3>
+
+            <% tips.each do |tip| %>
+            
+                <p class="tip-text">
+                    
+                
+                <a href="/tracks/<%= tip["track_id"] %>" class="tip-anchor"><%= tip["track_name"] %></a>
+                        by 
+                <a href="/users/<%= tip["track_publisher_id"] %>" class="tip-anchor"><%= tip["track_publisher_name"] %></a>
+            
                 </p>
                 <p class="tip-comment-text">
                     <%= tip["tip_comment"] %>
                 </p>
+             <% end %>
+        </section>
+
+    </div>
+
+
+    
+
+
+    <!--------------  User tracks ---------------->
+    <div class="user-tracks-column">
+        <h3 class="user-profile-heading"><%= user["user_name"] %>'s tracks:</h3>
+        <section class="user-tracks-grid">
+            <% tracks.each do |track| %>
+            <div class="user-track-container">
+                <p>
+                    <a href="/tracks/<%= track["id"] %>"> 
+                        <%= track["track_name"] %>
+                        <img src="<%= track["track_img"]%>" alt="image" class="user-track-img">
+                    </a>
+                </p>
+
+                
+
             </div>
-       
+
         <% end %>
-
-    </section>
-
-</div>
-
-<!-----------------------------
-
-User tracks
-
------------------------------->
-<div class="user-tracks-column">
-    <h3 class="user-tracks-heading"><%= user["user_name"] %>'s tracks:</h3>
-    <section class="user-tracks-grid">
-        <% tracks.each do |track| %>
-        <div class="user-track-container">
-            <h2>
-                <a href="/tracks/<%= track["id"] %>"> 
-                    <%= track["track_name"] %>
-                </a>
-                <p><%= track["id"] %></p>
-            </h2>
-
-            <img 
-            src="<%= track["track_img"]%>" 
-            alt="image" 
-            class="user-track-img">
-
-        </div>
-
-    <% end %>
-    </section>
+        </section>
+    </div>
 </div>

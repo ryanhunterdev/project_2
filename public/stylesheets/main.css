@@ -349,20 +349,72 @@ show track page
     }
 }
 
+/************************
 
+show user page
 
+************************/
 
-
-
-
-
-
-.user-img {
-    width: 20vw;
+.user-header {
+    text-align: center;
+    padding: 2rem;
 }
 
+.user-header > h2 {
+    font-size: 3rem;
+}
+
+.user-profile-heading {
+    font-size: 2rem;
+    padding-bottom: .5rem;
+}
+
+.edit-options {
+    display: flex;
+}
+
+.profile-location {
+    padding-bottom: .5rem;
+}
+
+.user-page-grid {
+    padding: 0 5rem;
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    margin: 0 auto;
+    max-width: 1700px;
+    gap: 5%;
+}
+
+.user-img {
+    width: 100%;
+}
+.user-info-column {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 2%;
+}
+
+.user-profile, .user-tips {
+    background-color: var(--subtle-grey);
+    padding: 2rem;
+}
+
+.tip-text {
+    padding-bottom: .5rem;
+}
+
+.user-tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 5%;
+    
+}
+
+
 .user-track-img {
-    width: 15vw;
+    width: 100%;
 }
 
 .delete-modal {
