@@ -40,6 +40,7 @@ show user page
 
 .user-img {
     width: 100%;
+    border: var(--setup-border)
 }
 
 .user-info-column {
@@ -51,6 +52,7 @@ show user page
 .user-profile, .user-tips {
     background-color: var(--subtle-grey);
     padding: 2rem;
+    border: var(--setup-border)
 }
 
 .tip-text {
@@ -69,15 +71,16 @@ show user page
 
 .user-track-container:hover {
     transform: scale(1.1);
-    transition: .3s;
+    transition: .3s;    
 }
 
 .user-track-img {
     width: 100%;
 }
 
-.tip_count {
+.tip-count {
     padding-top: .5rem;
+    text-align: center;
 }
 
 @media (max-width: 805px) {

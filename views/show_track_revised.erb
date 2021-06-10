@@ -1,7 +1,3 @@
-    <header class="track-header">
-        <h2>artist: <a href="/users/<%= publisher["id"] %>"> <%= publisher["user_name"] %> </a></h3>
-        <h2>title: <%= track["track_name"] %></h2>
-    </header>   
 <div class="track-page-wrapper">
     <div class="track-grid"> 
 
@@ -39,42 +35,15 @@
         <div class="track-information-column">
 
             <section class="track-info">
-                <h3 class="track-info-heading">genre:</h3>
-                <p class="track-info-text"><%= track["genre"] %></p>
-                <h3 class="track-info-heading">track info:</h3>
-                <p class="track-info-text"><%= track["track_info"] %></p>
-                
-            </section>
-            
-            <!-----------------Tip section------------------>
-
-            <section class="track-tips">
-
-                <div class="leave-tip-section">
-                    <form action="/tips" method="post">
-
-                    <!-- user inputs -->
-                        <h3 class="track-info-heading">dig this track?</h3>
-                        <label for="tip">leave a tip:</label>
-                        <input type="number" name="tip_amount" id="tip" step=".01" placeholder="$10.00" class="tip-input normal-input">
-                    <p>
-                        <% if logged_in? %>
-                            <label for="tip_comment">Add a comment:</label>
-                            <input type="text" name="tip_comment" id="tip_comment" class="tip-input normal-input"> 
-                        <% end %>
-                    </p>
-                        <!-- hidden inputs -->
-                        <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
-                        <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
-                        <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
-                        <input type="hidden" name="track_id" value="<%= track["id"] %>">
-                        <input type="hidden" name="track_name" value="<%= track["track_name"] %>">
-                        <input type="hidden" name="track_publisher_id" value="<%= publisher["id"] %>"> 
-
-                        <button class="tip-btn">submit</button>
-
-                    </form>
-
+                <div class="track-title-artist">
+                    <h3 class="track-info-heading"><a href="/users/<%= publisher["id"] %>" class="publisher-heading"> <%= publisher["user_name"] %>: </a></h3>
+                    <h3 class="track-info-heading"> <%= track["track_name"] %></h3>
+                </div>
+                <div class="track-description">
+                    <h3 class="track-info-heading">genre:</h3>
+                    <p class="track-info-text"><%= track["genre"] %></p>
+                    <h3 class="track-info-heading">track info:</h3>
+                    <p class="track-info-text"><%= track["track_info"] %></p>
                 </div>
 
                 <div class="user-tip-section">
@@ -102,6 +71,45 @@
                     
                     <% end %>
                 </div>
+                
+            </section>
+            
+            <!-----------------Tip section------------------>
+
+            <section class="track-tips">
+
+                <div class="leave-tip-section">
+                    <form action="/tips" method="post">
+
+                    <!-- user inputs -->
+                        <h3 class="track-info-heading">dig this track?</h3>
+                        <div class="input-wrap">
+                            <label for="tip">leave a tip:</label>
+                            <input type="number" name="tip_amount" id="tip" step=".01" placeholder="$10.00" class="tip-input normal-input">
+                        </div>
+                    <p>
+                        <% if logged_in? %>
+                            <div class="input-wrap">
+                                <label for="tip_comment">Add a comment:</label>
+                                <input type="text" name="tip_comment" id="tip_comment" class="tip-input normal-input"> 
+                            </div>
+                        <% end %>
+                    </p>
+                        <!-- hidden inputs -->
+                        <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
+                        <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
+                        <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
+                        <input type="hidden" name="track_id" value="<%= track["id"] %>">
+                        <input type="hidden" name="track_name" value="<%= track["track_name"] %>">
+                        <input type="hidden" name="track_publisher_id" value="<%= publisher["id"] %>"> 
+                        <div class="button-container">
+                            <button class="share-track-btn">submit</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
             </section>
         </div>
 

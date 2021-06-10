@@ -36,7 +36,7 @@ a:hover {
 
 .header-logo:hover,
 .nav-link:hover {
-    color: rgb(174, 4, 4);
+    color: var(--hover-text);
     transition: .3s;
 }
 

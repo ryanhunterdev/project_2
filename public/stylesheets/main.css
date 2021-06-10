@@ -8,6 +8,7 @@ global
     --background-color: white;
     --main-text-color: black;
     --subtle-grey: rgb(232, 230, 230);
+    --hover-text: rgb(174, 4, 4);
     --setup-border: 1px solid black;
     font-family: 'Work Sans', sans-serif;
 }

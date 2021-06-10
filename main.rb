@@ -10,6 +10,7 @@ require 'bcrypt'
 require 'pry' if development?
 require 'cloudinary'
 
+# require_relative 'db/cloudinary_configure.rb'
 require_relative 'db/helpers.rb'
 
 enable :sessions
@@ -20,19 +21,21 @@ enable :sessions
 
 ########################
 
+
 audio_options = {
     cloud_name: "ryanhunterdev",
     api_key: ENV['CLOUDINARY_API_KEY'],
     api_secret: ENV['CLOUDINARY_API_SECRET'],
     resource_type: "video",
-    format: "mp3"
+    format: "mp3",
+    eager_async: true
 }
 
 
 image_options = {
     cloud_name: "ryanhunterdev",
     api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET'],
+    api_secret: ENV['CLOUDINARY_API_SECRET']
 }
 
 ########################
@@ -182,7 +185,7 @@ get '/tracks/:id' do
 
   tips = run_sql("SELECT * from tips where track_id = $1;", [id])
 
-  erb :show_track, locals: { 
+  erb :show_track_revised, locals: { 
     track: track,
     publisher: publisher,
     session: session,

@@ -22,8 +22,9 @@ show track page
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
-    max-width: 1200px;
-    gap: 5%;
+    max-width: 1050px;
+    gap: 3%;
+    padding: 3rem;
 }
 
 .track-interactive-column {
@@ -36,24 +37,27 @@ show track page
     width: 100%;
 }
 
-.audio-controls {
+.audio-controls, .track-edit-delete {
     width: 100%;
+    margin-top: 1rem;
 }
 
 .track-edit-delete {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+
 }
 
 .track-information-column {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr .5fr;
     gap: 2rem;
 
 }
 
-.track-info {
+/* track info regular page
+ .track-info {
     background-color: var(--subtle-grey);
     display: flex;
     align-content: space-around;
@@ -61,15 +65,37 @@ show track page
     justify-content: center;
     align-items: flex-start;
     padding: 0 5rem;
+} */
+
+/* track info revised */
+.track-info {
+    background-color: var(--subtle-grey);
+    display: grid;
+    grid-template-rows: auto 3fr;
+    border: var(--setup-border);
+}
+
+.track-title-artist {
+    display: flex;
+    border-bottom: var(--setup-border);
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: .5rem;
 }
 
 .track-info-heading {
     font-weight: bold;
-    padding-bottom: 1rem;
+    padding: 1rem;
 }
 
 .track-info-text {
-    padding-bottom: 2rem;
+    padding: 1rem;
+}
+
+.track-description {
+    display: flex;
+    flex-direction: column;
 }
 
 .track-tips {
@@ -77,7 +103,8 @@ show track page
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 0 5rem;
+    border: var(--setup-border);
+    padding-bottom: 1rem;
 }
 
 .leave-tip-section {
@@ -101,14 +128,26 @@ show track page
 }
 
 .tip-container {
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 .tip-anchor, .tip-comment {
     font-weight: 600;
+    transition: .3s;
 }
 
-@media (max-width: 610px) {
+.publisher-heading {
+    transition: .3s;
+}
+
+.tip-anchor:hover,
+.publisher-heading:hover {
+    color: var(--hover-text);
+    transition: .3s;
+}
+
+
+@media (max-width: 850px) {
     .track-grid {
         display: grid;
         grid-template-columns: none;
