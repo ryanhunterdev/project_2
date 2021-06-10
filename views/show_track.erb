@@ -1,63 +1,114 @@
-<header class="track-header">
-    <h2><%= track["track_name"] %></h2>
-    <h3> <a href="/users/<%= publisher["id"] %>"> <%= publisher["user_name"] %> </a></h3>
-</header>   
+    <header class="track-header">
+        <h2>artist: <a href="/users/<%= publisher["id"] %>"> <%= publisher["user_name"] %> </a></h3>
+        <h2>title: <%= track["track_name"] %></h2>
+    </header>   
+<div class="track-page-wrapper">
+    <div class="track-grid"> 
 
-<!-----------------------------
+        <!------------Interactive column----------------->
+        <div class="track-interactive-column">
 
-Interactive column
+            <img src="<%= track["track_img"]%>" alt="<%= track["track_name"] %>" class="track-img">
 
------------------------------->
-<div class="track-interactive-column">
+            <div class="track-edit-delete">
 
-    <img src="<%= track["track_img"]%>" alt="<%= track["track_name"] %>" class="track-img">
+                <% if session[:user_id] == publisher["id"] %>
+                    <a href="/tracks/<%= track["id"] %>/edit" class="edit-btn">
+                        edit
+                    </a>   
 
-    <audio controls controlsList="nodownload" preload="auto" type="audio/mpeg">
-	<source src="<%= track["track_audio"] %>" type="audio/mpeg">
-	Your browser does not support the audio element.
-    </audio>
-
-    <div class="track-input-tips">
-        <form action="/tips" method="post">
-
-            <!-- user inputs -->
-            <label for="tip">Support artist, leave a tip:</label>
-            <input type="number" name="tip_amount" id="tip" step=".01" placeholder="1.00">
-     
-            <% if logged_in? %>
-                <label for="tip_comment">Add a comment:</label>
-                <input type="text" name="tip_comment" id="tip_comment"> 
-            <% end %>
-     
-            <!-- hidden inputs -->
-            <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
-            <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
-            <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
-            <input type="hidden" name="track_id" value="<%= track["id"] %>">
-            <input type="hidden" name="track_name" value="<%= track["track_name"] %>">
-            <input type="hidden" name="track_publisher_id" value="<%= publisher["id"] %>"> 
-
-            <button>submit</button>
-
-        </form>
-
-        <div class="track-edit-delete">
-
-            <% if session[:user_id] == publisher["id"] %>
-                <a href="/tracks/<%= track["id"] %>/edit" class="edit-btn">
-                    edit
-                </a>   
-
-                
-                <button class="delete-btn">
-                    delete
-                </button>
+                        
+                    <button class="delete-btn">
+                        delete
+                    </button>
+                            
                     
-               
-            <% end %> 
+                <% end %> 
+            </div>
+
+            <audio controls controlsList="nodownload" preload="auto" type="audio/mpeg" class="audio-controls">
+            <source src="<%= track["track_audio"] %>" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+
         </div>
-    </div>
+
+
+        <!---------------Track-info------------------>
+        
+        <div class="track-information-column">
+
+            <section class="track-info">
+                <h3 class="track-info-heading">genre:</h3>
+                <p class="track-info-text"><%= track["genre"] %></p>
+                <h3 class="track-info-heading">track info:</h3>
+                <p class="track-info-text"><%= track["track_info"] %></p>
+                
+            </section>
+            
+            <!-----------------Tip section------------------>
+
+            <section class="track-tips">
+
+                <div class="leave-tip-section">
+                    <form action="/tips" method="post">
+
+                    <!-- user inputs -->
+                        <h3 class="track-info-heading">dig this track?</h3>
+                        <label for="tip">leave a tip:</label>
+                        <input type="number" name="tip_amount" id="tip" step=".01" placeholder="$10.00" class="tip-input">
+                    <p>
+                        <% if logged_in? %>
+                            <label for="tip_comment">Add a comment:</label>
+                            <input type="text" name="tip_comment" id="tip_comment" class="tip-input"> 
+                        <% end %>
+                    </p>
+                        <!-- hidden inputs -->
+                        <input type="hidden" name="tipper_id" value="<%= session[:user_id] %>">
+                        <input type="hidden" name="tipper_name" value="<%= session[:user_name] %>">
+                        <input type="hidden" name="track_publisher_name" value="<%= publisher["user_name"] %>">
+                        <input type="hidden" name="track_id" value="<%= track["id"] %>">
+                        <input type="hidden" name="track_name" value="<%= track["track_name"] %>">
+                        <input type="hidden" name="track_publisher_id" value="<%= publisher["id"] %>"> 
+
+                        <button class="tip-btn">submit</button>
+
+                    </form>
+
+                </div>
+
+                <div class="user-tip-section">
+                    <h3 class="track-info-heading">supporters</h3>
+                    <% tips.each do |tip| %>
+                        <div class="tip-container">
+                            <p class="tip-text">
+
+                                <% if tip["tipper_id"] %>
+
+                                    <a href="/users/<%= tip["tipper_id"] %>" class="tip-anchor">
+                                        <%= tip["tipper_name"] %>
+                                    </a> 
+                                    supported this!
+                                    <p class="tip-comment">
+                                        <%= tip["tip_comment"] %>
+                                    </p>
+                                    
+                                <% else %>
+                                    anonymous supported this!
+                                <% end %>
+                            </p>
+                            
+                        </div>
+                    
+                    <% end %>
+                </div>
+            </section>
+        </div>
+
+    </div> 
 </div>
+
+<!-------- delete modal ------>
 
 <div class="delete-modal">
     deleting can't be undone, are you sure?
@@ -69,48 +120,3 @@ Interactive column
     </form>
     <button class="close-delete-modal">ok nah leave it be</button>
 </div>
-
-<!-----------------------------
-
-Track-info
-
------------------------------->
-
-<section class="track-info">
-
-    <p>Genre: <%= track["genre"] %></p>
-    <p><%= track["track_info"] %></p>
-    
-</section>
-
-<!-----------------------------
-
-Tip section
-
------------------------------->
-
-<section class="track-tips">
-
-    <% tips.each do |tip| %>
-        <div class="tip-container">
-            <p class="tip-text">
-
-                <% if tip["tipper_id"] %>
-
-                    <a href="/users/<%= tip["tipper_id"] %>" class="tip-anchor">
-                            <%= tip["tipper_name"] %>
-                    </a> supported this!
-                    
-                <% else %>
-                    anonymous supported this!
-                <% end %>
-            </p>
-            <p class="tip-comment-text">
-                <%= tip["tip_comment"] %>
-            </p>
-        </div>
-       
-    <% end %>
-
-</section>
-

@@ -7,6 +7,7 @@ global
 * {
     --background-color: white;
     --main-text-color: black;
+    --subtle-grey: rgb(232, 230, 230);
     --setup-border: 1px solid black;
     font-family: 'Work Sans', sans-serif;
 }
@@ -76,12 +77,12 @@ nav {
     padding-right: 1rem;
 }
 
-.login-button {
+.login-button, .delete-btn,  .close-delete-modal{
     border: none;
     background: none;
     font-size: inherit;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: underline
     
 }
 
@@ -208,8 +209,6 @@ all tracks
     margin: 0 auto;
 }
 
-.all
-
 .all-tracks-feed {
     z-index: 2;
     height: 80%;
@@ -222,9 +221,141 @@ all tracks
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
-.track-img {
-    width: 20vw;
+/************************
+
+show track page
+
+************************/
+
+.track-header {
+    text-align: center;
+    padding: 2rem;
 }
+
+.track-header > h2 {
+    font-size: 3rem;
+}
+
+.track-page-wrapper {
+    padding: 0 5rem;
+    font-size: 1.5rem;
+}
+
+.track-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    max-width: 1200px;
+    gap: 5%;
+}
+
+.track-interactive-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.track-img {
+    width: 100%;
+}
+
+.audio-controls {
+    width: 100%;
+}
+
+.track-edit-delete {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.track-information-column {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+
+}
+
+.track-info {
+    background-color: var(--subtle-grey);
+    display: flex;
+    align-content: space-around;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 5rem;
+}
+
+.track-info-heading {
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.track-info-text {
+    padding-bottom: 2rem;
+}
+
+.track-tips {
+    background-color: var(--subtle-grey);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 5rem;
+}
+
+.leave-tip-section {
+    display: flex;
+}
+
+.tip-input {
+    text-align: center;
+    width: 100%;
+    margin: 0.5rem;
+    float: right;
+}
+
+.tip-btn {
+  display: block;
+}
+
+.user-tip-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.tip-container {
+    padding: 0.5rem;
+}
+
+.tip-anchor, .tip-comment {
+    font-weight: 600;
+}
+
+@media (max-width: 610px) {
+    .track-grid {
+        display: grid;
+        grid-template-columns: none;
+        margin: 0 auto;
+        max-width: 1200px;
+        gap: 2%;
+    }
+
+    .track-tips, .track-info {
+        padding: 2rem;
+    }
+
+    .track-header > h2 {
+        font-size: 2.5rem;
+    }
+}
+
+
+
+
+
+
+
+
 
 .user-img {
     width: 20vw;
@@ -248,12 +379,16 @@ all tracks
     background: white;
     border: 1px solid black;
     border-radius: 10px;
+    font-size: 1.5rem;
 }
 
 .reveal-modal {
     display: grid;
     animation: fade-in ease 0.3s;
 }
+
+
+
 
 @keyframes fade-in {
     0% {

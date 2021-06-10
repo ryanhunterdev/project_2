@@ -24,8 +24,10 @@ audio_options = {
     cloud_name: "ryanhunterdev",
     api_key: ENV['CLOUDINARY_API_KEY'],
     api_secret: ENV['CLOUDINARY_API_SECRET'],
-    resource_type: "video"
+    resource_type: "video",
+    format: "mp3"
 }
+
 
 image_options = {
     cloud_name: "ryanhunterdev",
@@ -318,3 +320,4 @@ delete '/session' do
   session[:user_id] = nil
   redirect back
 end
+
