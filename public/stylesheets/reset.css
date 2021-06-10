@@ -22,11 +22,11 @@ img {
     height: auto;
 }
 
-/** stopping scrolling of body may be useful later
+/** stopping scrolling of body may be useful later */
 html, body {
-	height:100%;
-	overflow: hidden;
-} **/
+	height: 100%;
+    overflow: hidden;
+} 
 
 a {
     color: black;
