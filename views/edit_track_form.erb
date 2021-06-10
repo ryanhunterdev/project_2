@@ -6,6 +6,7 @@
         <h3 class="edit-subheading">edit track details</h3>
         <form action="/tracks/<%= track["id"] %>" method="post" enctype="multipart/form-data"> 
             <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="track_publisher_name" value="<%= session[:user_name] %>">
 
             <!-- user inputs -->
             <div class="input-wrap">
@@ -45,8 +46,8 @@
 
             <div class="upload-wrap">
                 <label for="track_artwork"></label>
-                <input type="file" name="track_artwork" class="upload_input">
-                <button>submit</button>
+                <input type="file" name="track_img" class="normal_input">
+                <button class="share-track-btn">submit</button>
             </div>
 
         </form>
@@ -57,8 +58,8 @@
             <input type="hidden" name="_method" value="put">
             <div class="upload-wrap">
                 <label for="track_audio"></label>
-                <input type="file" name="track_audio" class="upload_input">
-                <button>submit</button>
+                <input type="file" name="track_audio" class="normal_input">
+                <button class="share-track-btn">submit</button>
             </div>
         </form>
 

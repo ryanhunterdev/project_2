@@ -49,20 +49,25 @@
         <section class="user-tips">
             <h3 class="user-profile-heading"><%= user["user_name"] %> supports:</h3>
 
-            <% tips.each do |tip| %>
-            
-                <p class="tip-text">
-                    
+            <% if tips.count > 0 %>
+                <% tips.each do |tip| %>
                 
-                <a href="/tracks/<%= tip["track_id"] %>" class="tip-anchor"><%= tip["track_name"] %></a>
-                        by 
-                <a href="/users/<%= tip["track_publisher_id"] %>" class="tip-anchor"><%= tip["track_publisher_name"] %></a>
-            
-                </p>
-                <p class="tip-comment-text">
-                    <%= tip["tip_comment"] %>
-                </p>
-             <% end %>
+                    <p class="tip-text">
+                        
+                    
+                    <a href="/tracks/<%= tip["track_id"] %>" class="tip-anchor"><%= tip["track_name"] %></a>
+                            by 
+                    <a href="/users/<%= tip["track_publisher_id"] %>" class="tip-anchor"><%= tip["track_publisher_name"] %></a>
+                
+                    </p>
+                    <p class="tip-comment-text">
+                        <%= tip["tip_comment"] %>
+                    </p>
+                <% end %>
+            <% else %>
+                <p>You haven't tipped any tracks yet.</p>
+                <a href="/tracks">explore tracks</a>
+            <% end %>
         </section>
 
     </div>
@@ -75,20 +80,21 @@
     <div class="user-tracks-column">
         <h3 class="user-profile-heading"><%= user["user_name"] %>'s tracks:</h3>
         <section class="user-tracks-grid">
-            <% tracks.each do |track| %>
-            <div class="user-track-container">
-                <p>
-                    <a href="/tracks/<%= track["id"] %>"> 
-                        <%= track["track_name"] %>
-                        <img src="<%= track["track_img"]%>" alt="image" class="user-track-img">
-                    </a>
-                </p>
-
-                
-
-            </div>
-
-        <% end %>
+            <% if tracks.count > 0 %>
+                <% tracks.each do |track| %>
+                <div class="user-track-container">
+                    <p>
+                        <a href="/tracks/<%= track["id"] %>"> 
+                            <%= track["track_name"] %>
+                            <img src="<%= track["track_img"]%>" alt="image" class="user-track-img">
+                        </a>
+                    </p>
+                </div>
+                <% end %>
+            <% else %>
+                <p>You don't have any tracks yet.</p>
+                <a href="/tracks/new">share tracks</a>
+            <% end %>
         </section>
     </div>
 </div>

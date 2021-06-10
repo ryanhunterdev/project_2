@@ -1,0 +1,15 @@
+.about-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.about-section {
+    max-width: 800px;
+    /* border: var(--setup-border);
+    background-color: var(--subtle-grey); */
+}
+
+.about-text {
+    font-size: 2rem;
+    padding: 1rem;
+}

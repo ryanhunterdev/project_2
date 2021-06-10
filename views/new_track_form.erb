@@ -4,6 +4,7 @@
 
         <!-- hidden inputs -->
         <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+        <input type="hidden" name="track_publisher_name" value="<%= session[:user_name] %>">
 
         <!-- user inputs -->
         <div class="input-wrap">
@@ -17,13 +18,13 @@
         </div>
 
         <div class="input-wrap">
-            <label for="track_audio">upload track:</label>
-            <input type="file" name="track_audio" class="normal-input">
+            <label for="track_audio">upload mp3:</label>
+            <input type="file" name="track_audio" class="normal-input" required>
         </div>
 
         <div class="input-wrap">
-            <label for="track_artwork">upload artwork:</label>
-            <input type="file" name="track_artwork" class="normal-input">
+            <label for="track_img">upload artwork</label>
+            <input type="file" name="track_img" class="normal_input" required>
         </div>
 
         <div class="input-wrap">   

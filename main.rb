@@ -51,6 +51,10 @@ get '/' do
   }
 end
 
+get '/about' do
+  erb :about
+end
+
 ########################
 
 # user routes
@@ -82,7 +86,6 @@ get '/users/:id' do
   user = grab_response_by_id("users", id)
   tracks = run_sql("SELECT * from tracks where user_id = $1;", [id])
   tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
-  
   tip_count = total_tips(tips)
 
   erb :show_user, locals: {
@@ -159,20 +162,20 @@ post '/tracks' do
   redirect '/login' unless logged_in?
 
   audio_res = Cloudinary::Uploader.upload(params['track_audio']['tempfile'], audio_options)
-  image_res = Cloudinary::Uploader.upload(params['track_artwork']['tempfile'], image_options)
+  image_res = Cloudinary::Uploader.upload(params['track_img']['tempfile'], image_options)
 
 
-  sql = "INSERT INTO tracks (user_id, track_audio, track_name, track_img, track_info, purchase_link, genre) VALUES ($1, $2, $3, $4, $5, $6, $7);"
-
+  sql = "insert into tracks (user_id, track_name, track_img, track_info, purchase_link, genre, track_audio, track_publisher_name) values ($1, $2, $3, $4, $5, $6, $7, $8)"
   run_sql(sql, [
     params["user_id"],
-    audio_res["url"],
     params["track_name"],
     image_res["url"],
     params["track_info"],
     params["purchase_link"],
-    params["genre"]
-  ])
+    params["genre"],
+    audio_res["url"],
+    params["track_publisher_name"]
+])
   redirect "/users/#{session[:user_id]}"
 end
 
@@ -185,7 +188,7 @@ get '/tracks/:id' do
 
   tips = run_sql("SELECT * from tips where track_id = $1;", [id])
 
-  erb :show_track_revised, locals: { 
+  erb :show_track, locals: { 
     track: track,
     publisher: publisher,
     session: session,
@@ -208,12 +211,13 @@ end
 
 put '/tracks/:id' do
   redirect '/login' unless logged_in?
-  sql = "UPDATE tracks SET track_name = $1, genre = $2, track_info = $3, purchase_link = $4 WHERE id = $5;"  
+  sql = "UPDATE tracks SET track_name = $1, genre = $2, track_info = $3, purchase_link = $4, track_publisher_name = $5 WHERE id = $6;"  
   run_sql(sql, [
     params["track_name"],
     params["genre"],
     params["track_info"],
     params["purchase_link"],
+    params["track_publisher_name"],
     params["id"]
   ])
   redirect "tracks/#{params["id"]}"
@@ -230,7 +234,7 @@ put '/audio/:id' do
 end
 
 put '/track_img/:id' do
-  image_res = Cloudinary::Uploader.upload(params['track_artwork']['tempfile'], image_options)
+  image_res = Cloudinary::Uploader.upload(params['track_img']['tempfile'], image_options)
   sql = "update tracks set track_img = $1 where id = $2;"
   run_sql(sql, [
     image_res["url"],

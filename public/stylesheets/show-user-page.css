@@ -126,3 +126,10 @@ show user page
       opacity:1;
     }
 }
+
+@media (max-width: 400px) {
+    .user-page-grid {
+        font-size: 1.3rem;
+    }
+    
+}

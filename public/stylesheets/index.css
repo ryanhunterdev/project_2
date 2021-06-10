@@ -52,6 +52,7 @@ index
 
 .feed-track-img {
     width: 100%;
+    border-bottom: var(--setup-border);
 }
 
 .tracks-info-container {

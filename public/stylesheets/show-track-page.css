@@ -109,6 +109,7 @@ show track page
 
 .leave-tip-section {
     display: flex;
+    justify-content: center;
 }
 
 .tip-input {
@@ -148,11 +149,15 @@ show track page
 
 
 @media (max-width: 850px) {
+    .track-page-wrapper {
+        padding: 0;
+    }
+
     .track-grid {
         display: grid;
         grid-template-columns: none;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: 500px;
         gap: 2%;
     }
 
@@ -163,4 +168,11 @@ show track page
     .track-header > h2 {
         font-size: 2.5rem;
     }
+}
+
+@media (max-width: 400px) {
+    .track-page-wrapper {
+        font-size: 1.3rem;
+    }
+    
 }

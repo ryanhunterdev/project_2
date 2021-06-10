@@ -9,6 +9,7 @@ tracks new form
     place-items: center;
     width: 70vw;
     margin: 0 auto;
+    max-width: 1300px;
 }
 
 .new-track-form, 
@@ -96,6 +97,7 @@ edit track form
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     gap: 2%;
+    max-width: 1300px;
 }  
 
 .edit-subheading {
@@ -148,6 +150,7 @@ edit user
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     gap: 2%;
+    max-width: 1300px;
 } 
 
 .edit-img-form {
