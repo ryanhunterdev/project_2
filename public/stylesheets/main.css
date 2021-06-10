@@ -120,6 +120,7 @@ page content
 .page-content {
     position: relative;
     top: 14rem;
+    z-index: 1;
 }
 
 /************************
@@ -128,10 +129,6 @@ index
 
 ************************/
 
-.index-feed-heading {
-    font-size: 3rem;
-}
-
 .index-wrapper {
     display: grid;
     display: grid;
@@ -139,13 +136,14 @@ index
 }
 
 .index-tracks-feed {
-    overflow: scroll;
-	z-index: 1;
-    height: 80%;
+    /* overflow: scroll; */
+    z-index: 2;
+    /* height: 80%; */
     border-right: var(--setup-border);
 }
 
-.index-feed-heading {
+.index-feed-heading, .all-tracks-heading {
+    font-size: 3rem;
     text-align: center;
     padding: 2rem;
 }
@@ -154,7 +152,6 @@ index
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr 1fr;
-    
 }
 
 .index-tracks-container {
@@ -187,6 +184,7 @@ index
 
 .welcome-column {
     text-align: center;
+    overflow: hidden;
 }
 
 .welcome-heading {
@@ -197,6 +195,31 @@ index
 .welcome-text {
     font-size: 1.5rem;
     padding: 2rem 5rem;
+}
+
+/************************
+
+all tracks
+
+************************/
+
+.all-tracks-wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.all
+
+.all-tracks-feed {
+    z-index: 2;
+    height: 80%;
+    overflow: visible;
+}
+
+.all-tracks-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
 .track-img {
