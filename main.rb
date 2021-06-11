@@ -68,12 +68,13 @@ end
 post '/users' do
 
   password = params["password"]
+  email = params["email"].downcase
   password_digest = BCrypt::Password.create(password)
 
   sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4);"
   run_sql(sql, [
     params['user_name'],
-    params['email'],
+    email,
     password_digest,
     params['user_img']
 ])
@@ -309,8 +310,8 @@ get '/login' do
 end
 
 post '/session' do
-
-  records = run_sql("select * from users where email = $1", [params['email']])
+  email = params['email'].downcase
+  records = run_sql("select * from users where email = $1", [email])
 
   if records.count > 0 && BCrypt::Password.new(records[0]['password_digest']) == params['password']
     logged_in_user = records[0]
