@@ -23,6 +23,7 @@ Logging in allows customisation of the users account page information, uploading
 - PostgreSQL for the database
 - Cloudinary API & SPK for file hosting
 - BCrypt for password encryption 
+- Heroku for deployment
 
 ## Feature wishlist
 
