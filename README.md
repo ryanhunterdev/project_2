@@ -12,7 +12,7 @@ The app was loosely inspired by the idea of busking; casually hearing some new m
 
 Fresh music uploads appear on the feed in the index page.
 
-Visitors to the site can listen to tracks, visit artist pages and leave tips on tracks and create their own accounts. 
+Visitors to the site can listen to tracks, visit artist pages, leave tips on tracks and create their own accounts. 
 
 Logging in allows customisation of the users account page information, uploading of tracks and leaving optional comments along with tips. Each users account page displays the artists and tracks they have supported with tips and their track uploads (if any).
 
