@@ -86,7 +86,7 @@ get '/users/:id' do
 
   user = grab_response_by_id("users", id)
   tracks = run_sql("Select * from tracks where user_id = $1 ORDER by id desc;", [id])
-  tips = run_sql("SELECT * from tips where tipper_id = $1;", [id])
+  tips = run_sql("SELECT * from tips where track_publisher_id = $1;", [id])
   tip_count = total_tips(tips)
 
   erb :show_user, locals: {
