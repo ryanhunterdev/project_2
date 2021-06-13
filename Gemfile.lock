@@ -30,6 +30,8 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     tilt (2.0.10)
     unf (0.1.4)
       unf_ext
@@ -44,6 +46,7 @@ DEPENDENCIES
   cloudinary
   pg
   sinatra
+  sinatra-flash
 
 BUNDLED WITH
    2.2.19

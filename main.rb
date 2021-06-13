@@ -9,6 +9,7 @@ require 'pg'
 require 'bcrypt'
 require 'pry' if development?
 require 'cloudinary'
+require 'sinatra/flash'
 
 # require_relative 'db/cloudinary_configure.rb'
 require_relative 'db/helpers.rb'
@@ -23,9 +24,6 @@ enable :sessions
 
 
 audio_options = {
-    cloud_name: "ryanhunterdev",
-    api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET'],
     resource_type: "video",
     format: "mp3",
     eager_async: true
@@ -33,9 +31,7 @@ audio_options = {
 
 
 image_options = {
-    cloud_name: "ryanhunterdev",
-    api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET']
+
 }
 
 ########################
@@ -55,6 +51,24 @@ get '/about' do
   erb :about
 end
 
+post '/blah' do
+  # This message won't be seen until the NEXT Web request that accesses the flash collection
+  flash[:blah] = "You were feeling blah at #{Time.now}."
+  
+  # Accessing the flash displays messages set from the LAST request
+  "Feeling blah again? That's too bad. #{flash[:blah]}"
+end
+
+get '/bleh' do
+  if flash[:blah]
+    # The flash collection is cleared after any request that uses it
+    "Have you ever felt blah? Oh yes. #{flash[:blah]} Remember?"
+  else
+    "Oh, now you're only feeling bleh?"
+  end
+end
+
+
 ########################
 
 # user routes
@@ -70,6 +84,7 @@ post '/users' do
   password = params["password"]
   email = params["email"].downcase
   password_digest = BCrypt::Password.create(password)
+  search_res = 
 
   sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4);"
   run_sql(sql, [

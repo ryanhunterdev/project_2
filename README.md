@@ -36,7 +36,6 @@ The following are features I would like to add or improve:
     -  Crop images to squares on upload
 - A custom player for the audio
 - The ability for users to 'follow' other users
-- paypal for the tips
 
 ## Screenshots
 
