@@ -31,7 +31,9 @@ audio_options = {
 
 
 image_options = {
-
+  width: 500,
+  height: 500,
+  crop: "crop"
 }
 
 ########################
@@ -51,22 +53,24 @@ get '/about' do
   erb :about
 end
 
-post '/blah' do
-  # This message won't be seen until the NEXT Web request that accesses the flash collection
-  flash[:blah] = "You were feeling blah at #{Time.now}."
-  
-  # Accessing the flash displays messages set from the LAST request
-  "Feeling blah again? That's too bad. #{flash[:blah]}"
-end
+# this is an experiement for the sinatra flash extension
 
-get '/bleh' do
-  if flash[:blah]
-    # The flash collection is cleared after any request that uses it
-    "Have you ever felt blah? Oh yes. #{flash[:blah]} Remember?"
-  else
-    "Oh, now you're only feeling bleh?"
-  end
-end
+# post '/blah' do
+#   # This message won't be seen until the NEXT Web request that accesses the flash collection
+#   flash[:blah] = "You were feeling blah at #{Time.now}."
+  
+#   # Accessing the flash displays messages set from the LAST request
+#   "Feeling blah again? That's too bad. #{flash[:blah]}"
+# end
+
+# get '/bleh' do
+#   if flash[:blah]
+#     # The flash collection is cleared after any request that uses it
+#     "Have you ever felt blah? Oh yes. #{flash[:blah]} Remember?"
+#   else
+#     "Oh, now you're only feeling bleh?"
+#   end
+# end
 
 
 ########################
