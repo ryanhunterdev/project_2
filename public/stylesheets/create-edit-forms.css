@@ -119,13 +119,6 @@ edit track form
     align-items: center;
 }
 
-
-
-@media (max-width: 600px) {
-
-}
-
-
 /************************
 
 login form
@@ -156,4 +149,8 @@ edit user
 .edit-img-form {
     display: flex;
     align-items: center;
+}
+
+.sign-up-alert {
+    color: var(--hover-text);
 }

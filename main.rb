@@ -1,9 +1,4 @@
-# require 'active_support' # for cl_image_tag
-# require 'action_view' # for cl_image_tag
-
-# include CloudinaryHelper # for cl_image_tag     
-
-require 'sinatra'
+  require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pg'
 require 'bcrypt'
@@ -11,7 +6,6 @@ require 'pry' if development?
 require 'cloudinary'
 require 'sinatra/flash'
 
-# require_relative 'db/cloudinary_configure.rb'
 require_relative 'db/helpers.rb'
 
 enable :sessions
@@ -80,7 +74,20 @@ end
 ########################
 
 get '/users/new' do
-  erb :new_user_form
+  erb :new_user_form, locals: {
+    sign_up_alert: ""
+  }
+end
+
+get '/users/new/:alert' do
+  new_user_alerts = [
+    "username already exists, please choose another",
+    "email already registered, please use another"
+  ]
+  alert_index = params["alert"].to_i 
+  erb :new_user_form, locals: {
+    sign_up_alert: new_user_alerts[alert_index]
+  }
 end
 
 post '/users' do
@@ -88,15 +95,24 @@ post '/users' do
   password = params["password"]
   email = params["email"].downcase
   password_digest = BCrypt::Password.create(password)
-  search_res = 
-
-  sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4);"
-  run_sql(sql, [
+  search_user_name = run_sql("select * from users where user_name = $1", [params["user_name"]])
+  search_email = run_sql("select * from users where email = $1", [email])
+  
+  # binding.pry
+  if search_user_name.count > 0 
+    redirect '/users/new/0'
+  elsif search_email.count > 0
+    redirect '/users/new/1'
+  else
+    sql = "insert into users (user_name, email, password_digest, user_img) values ($1, $2, $3, $4);"
+    run_sql(sql, [
     params['user_name'],
     email,
     password_digest,
     params['user_img']
-])
+    ])
+  end
+
   redirect '/login'
 end
 

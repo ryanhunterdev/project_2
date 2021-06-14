@@ -6,17 +6,23 @@
         <!-- user inputs -->
         <div class="input-wrap">
             <label for="user_name">username:</label>
-            <input type="text" name="user_name" class="normal-input">
+            <input type="text" name="user_name" class="normal-input" required>
+        </div>
+
+        <div class="sign-up-alert">
+            <p class="sign-up-alert">
+                <%= sign_up_alert %>
+            </p>
         </div>
 
         <div class="input-wrap">
             <label for="email">email:</label>
-            <input type="text" name="email" class="normal-input"> 
+            <input type="text" name="email" class="normal-input" required> 
         </div>
 
         <div class="input-wrap">
             <label for="password">password:</label>
-         <input type="password" name="password" class="normal-input">
+         <input type="password" name="password" class="normal-input" required>
         </div>
 
         <!-- hidden inputs -->
@@ -25,6 +31,6 @@
         <div class="button-container">
             <button class="share-track-btn">sign up</button>
         </div>
-        
+
     </form>
 </div>
