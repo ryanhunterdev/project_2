@@ -151,6 +151,6 @@ edit user
     align-items: center;
 }
 
-.sign-up-alert {
+.alert-text {
     color: var(--hover-text);
 }
